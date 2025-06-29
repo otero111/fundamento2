@@ -178,16 +178,14 @@
 <body>
 
     <div class="container">
-        <!-- Pantalla de Menú Inicial -->
         <div id="menu-screen" class="active">
             <h1>Guía de Estudio Definitiva</h1>
             <h2>Fundamentos de la Psicología</h2>
             <p>Contenido actualizado y verificado con los materiales del curso y parciales anteriores. ¡Éxito en tu examen!</p>
-            <button class="btn" onclick="startQuiz('tf')">Verdadero o Falso (65 Preguntas)</button>
-            <button class="btn" onclick="startQuiz('mc')">Múltiple Opción (55 Preguntas)</button>
+            <button class="btn" onclick="startQuiz('tf')">Verdadero o Falso</button>
+            <button class="btn" onclick="startQuiz('mc')">Múltiple Opción</button>
         </div>
 
-        <!-- Pantalla del Cuestionario -->
         <div id="quiz-screen">
             <div class="quiz-header">
                 <div id="prev-question" class="nav-arrow" onclick="previousQuestion()">&#x2190;</div>
@@ -207,7 +205,6 @@
             </div>
         </div>
         
-        <!-- Pantalla de Puntuación Final -->
         <div id="score-screen">
             <h2>¡Cuestionario Completado!</h2>
             <div id="total-time-display"></div>
@@ -224,48 +221,33 @@
 
     <script>
         const tfQuestions = [
-             // Contenido de Clase 7: Antecedentes
             { question: "La tradición psicopatológica francesa, que dio origen a la psiquiatría, utilizó principalmente el método experimental de laboratorio.", answer: false, justification: "Falso. La tradición psicopatológica francesa utilizó el método clínico, tomando como modelo la medicina mental para estudiar fenómenos como la histeria. El método experimental fue característico de la tradición psicofísica alemana." },
             { question: "El Positivismo de Augusto Comte sostenía que la ciencia debía basarse en la interpretación subjetiva y la metafísica.", answer: false, justification: "Falso. El Positivismo sostenía lo contrario: que la ciencia debía basarse en hechos observables, medibles y objetivos, siguiendo el modelo de las ciencias naturales." },
             { question: "La Frenología de Franz Gall, aunque desacreditada, fue importante porque introdujo la idea de que el cerebro es el órgano de la mente con funciones localizadas.", answer: true, justification: "Verdadero. Si bien su método de medir el cráneo era pseudocientífico, la idea central de la localización de funciones mentales en áreas específicas del cerebro fue un antecedente crucial para la neurociencia moderna." },
             { question: "Gustav Fechner, padre de la Psicofísica, buscaba establecer una relación matemática entre el mundo físico (estímulos) y el mundo psíquico (sensaciones).", answer: true, justification: "Verdadero. Fechner acuñó el término y desarrolló métodos experimentales para medir las sensaciones, demostrando que la experiencia subjetiva podía ser cuantificada." },
             { question: "Hermann von Helmholtz demostró que el impulso nervioso era instantáneo, reforzando la idea de una mente inmaterial.", answer: false, justification: "Falso. Helmholtz midió la velocidad del impulso nervioso y demostró que no era instantáneo, sino un proceso físico y medible, apoyando la visión materialista." },
-            
-            // Contenido de Clase 8: Psicología Experimental y Medición
             { question: "El objeto de estudio de Wilhelm Wundt en su laboratorio de Leipzig eran los procesos mentales superiores como el razonamiento abstracto.", answer: false, justification: "Falso. Wundt se centró en la 'experiencia inmediata', es decir, los procesos mentales básicos (sensaciones, sentimientos). Consideraba que los procesos superiores debían estudiarse a través de su 'Psicología de los Pueblos'." },
             { question: "El concepto de 'apercepción' de Wundt describe un proceso pasivo de la conciencia.", answer: false, justification: "Falso. La apercepción es el núcleo de su 'voluntarismo'. Es un proceso activo y creativo de la mente por el cual la atención organiza los contenidos mentales." },
             { question: "Francis Galton creía que la inteligencia era principalmente producto del ambiente y la educación, oponiéndose al innatismo.", answer: false, justification: "Falso. Galton fue un firme defensor del innatismo. Creía que la inteligencia y el talento eran rasgos hereditarios y fue el fundador del movimiento eugenésico." },
             { question: "Alfred Binet desarrolló su test de inteligencia con el objetivo principal de clasificar a los soldados en la Primera Guerra Mundial.", answer: false, justification: "Falso. Binet desarrolló su test con un fin práctico y humanista: identificar a los niños con dificultades de aprendizaje en el sistema escolar francés para proporcionarles educación especial." },
             { question: "El Coeficiente Intelectual (CI) fue un concepto desarrollado por William James en el marco del Funcionalismo.", answer: false, justification: "Falso. El concepto de CI (Edad Mental / Edad Cronológica x 100) fue acuñado por Lewis Terman en EE. UU. al adaptar el test de Binet." },
-
-            // Contenido de Clase 9: Estructuralismo y Funcionalismo
             { question: "El Estructuralismo de Titchener buscaba responder a la pregunta '¿para qué sirve la mente?'.", answer: false, justification: "Falso. Esa era la pregunta del Funcionalismo. El Estructuralismo buscaba responder '¿qué es la mente?', intentando descomponerla en sus elementos básicos (sensaciones, imágenes, afectos)." },
             { question: "William James, figura clave del Funcionalismo, describió la conciencia como una serie de elementos estáticos y separables.", answer: false, justification: "Falso. James la describió como un 'flujo de la conciencia' (stream of consciousness), una corriente continua, personal y siempre cambiante." },
             { question: "El Funcionalismo norteamericano estuvo fuertemente influido por la teoría de la evolución de Darwin.", answer: true, justification: "Verdadero. El Funcionalismo adoptó la idea de adaptación como eje central. Se preguntaba para qué sirven los procesos mentales en la lucha del organismo por adaptarse a su entorno, una pregunta directamente inspirada en el darwinismo." },
             { question: "El Estructuralismo de Titchener se interesaba por las diferencias individuales y la aplicación práctica de la psicología.", answer: false, justification: "Falso. El estructuralismo de Titchener era una psicología 'pura', enfocada en encontrar la estructura universal de la mente adulta normal. El interés por las diferencias individuales fue característico del funcionalismo." },
-
-            // Contenido de Clase 10: Conductismo
             { question: "El Conductismo de Watson se apoyó fuertemente en el método de la introspección para estudiar la conducta.", answer: false, justification: "Falso. El Conductismo nació precisamente de un rechazo radical a la introspección por considerarla subjetiva y no científica. Propuso como único método válido la observación objetiva de la conducta." },
             { question: "La 'Ley del Efecto' de Thorndike postula que las conductas seguidas de consecuencias satisfactorias tienden a repetirse.", answer: true, justification: "Verdadero. Esta ley es la base del aprendizaje instrumental y un antecedente directo del condicionamiento operante de Skinner." },
             { question: "Según Watson, las emociones complejas como la vergüenza o el orgullo eran innatas en el ser humano.", answer: false, justification: "Falso. Watson sostenía que solo tres emociones eran básicas e innatas (miedo, cólera y amor) y las demás eran aprendidas por condicionamiento." },
             { question: "El experimento del 'Pequeño Albert' es un ejemplo de condicionamiento operante.", answer: false, justification: "Falso. Es el ejemplo paradigmático de condicionamiento clásico en humanos. Se asoció un estímulo neutro (rata blanca) con un estímulo incondicionado (ruido fuerte)." },
-            
-            // Contenido de Clase 11: Psicoanálisis
             { question: "El Psicoanálisis surgió en la Viena de fin de siglo, un contexto social caracterizado por una fuerte represión de la sexualidad.", answer: true, justification: "Verdadero. La moral victoriana represiva de la época es un contexto crucial para entender por qué las teorías de Freud sobre la sexualidad inconsciente e infantil fueron tan revolucionarias." },
             { question: "Jean-Martin Charcot sostenía que la histeria era una simulación de los pacientes para llamar la atención.", answer: false, justification: "Falso. Charcot, un prestigioso neurólogo, luchó por legitimar la histeria como una enfermedad real, aunque de origen psíquico." },
             { question: "Freud abandonó la hipnosis porque descubrió que no todos los pacientes eran hipnotizables y las curas a menudo no eran duraderas.", answer: true, justification: "Verdadero. Además, se dio cuenta de que bajo hipnosis el paciente no participaba conscientemente en su curación, lo que lo llevó a desarrollar el método de la asociación libre." },
             { question: "La 'teoría de la seducción' de Freud sostiene que la causa de la neurosis es siempre una fantasía infantil, nunca un evento real.", answer: false, justification: "Falso. La teoría de la seducción fue su primera hipótesis, que sostenía que la causa era un abuso sexual real. Freud la abandonó al descubrir el poder de la fantasía inconsciente, pero no negó que los abusos reales pudieran ocurrir." },
-            
-            // Clases 12 y 13
             { question: "La psicología en Latinoamérica, en sus inicios, se caracterizó por desarrollar teorías y métodos completamente originales y desvinculados de Europa o EE. UU.", answer: false, justification: "Falso. Una característica central de la psicología latinoamericana inicial fue su carácter receptivo y dependiente de los modelos extranjeros." },
             { question: "La 'crisis de desunión' en psicología se refiere a la falta de psicólogos para cubrir la demanda de la población.", answer: false, justification: "Falso. Se refiere al debate interno de la disciplina sobre su falta de una teoría y un método unificados, es decir, a su fragmentación en múltiples escuelas y enfoques." },
             { question: "Según Bleger, el instrumento principal con el que trabaja el psicólogo es su propia personalidad.", answer: true, justification: "Verdadero. Bleger enfatiza que el psicólogo trabaja 'con' y 'a través' de sí mismo, siendo su personalidad y su capacidad de establecer vínculos sus herramientas fundamentales." },
             { question: "El censo de 2014 en Uruguay mostró que la profesión de psicólogo está distribuida de manera equitativa en todo el territorio nacional.", answer: false, justification: "Falso. El censo reveló una fuerte concentración geográfica en la zona metropolitana (Montevideo y Canelones)." },
-            
-            // Preguntas V/F adicionales basadas en parciales
-            { question: "La Psicología de la Gestalt surge como una reacción contra el enfoque elementarista y atomista del Estructuralismo.", answer: true, justification: "Verdadero. La Gestalt criticó al Estructuralismo por intentar descomponer la experiencia. Su principio fundamental es que 'el todo es más que la suma de sus partes', enfatizando la percepción como totalidades organizadas." },
             { question: "Los filósofos del Neorromanticismo, con su interés por los sueños y lo irracional, son considerados una influencia importante para el Psicoanálisis de Freud.", answer: true, justification: "Verdadero. Movimientos como el Romanticismo y filósofos como Schopenhauer crearon un clima intelectual propicio para las ideas de Freud sobre el inconsciente." },
-            { question: "La Ley de la Pregnancia de la Gestalt sostiene que la organización perceptual tiende a ser la más simple, regular y estable posible.", answer: true, justification: "Verdadero. También llamada Ley de la Buena Forma, afirma que nuestro sistema perceptivo prefiere las formas más ordenadas y simétricas de entre todas las posibilidades." },
             { question: "Según el modelo de la discapacidad social, esta es principalmente un problema individual de la persona, causado por su condición de salud.", answer: false, justification: "Falso. El modelo social postula que la discapacidad no reside en la persona, sino en la interacción negativa entre su condición de salud y un contexto que impone barreras." },
             { question: "La psicología humanista considera que el método experimental del conductismo es el más adecuado para comprender la experiencia humana.", answer: false, justification: "Falso. La Psicología Humanista critica fuertemente al conductismo y al psicoanálisis. Propone un enfoque holístico centrado en la experiencia subjetiva, la libertad y la autorrealización." },
             { question: "La teoría de los cuatro humores de Hipócrates es un ejemplo temprano de una explicación sobrenatural de la enfermedad.", answer: false, justification: "Falso. Al contrario, la teoría de los humores fue uno de los primeros intentos de dar una explicación natural a la salud, basándose en el equilibrio de sustancias corporales." },
@@ -273,9 +255,7 @@
             { question: "La Revolución Científica de la Modernidad (Copérnico, Galileo, Newton) reforzó la visión de un universo orgánico y animado.", answer: false, justification: "Falso. La Revolución Científica reemplazó la visión orgánica del mundo por una visión mecanicista: el universo como una gran 'máquina' gobernada por leyes matemáticas." },
             { question: "Para Bleger, las tres áreas de la conducta (mente, cuerpo, mundo externo) pueden manifestarse de forma independiente.", answer: false, justification: "Falso. Bleger postula que las tres áreas son siempre coexistentes y la conducta es una manifestación unitaria, aunque una pueda predominar." },
             { question: "En la Edad Media, la disección de cadáveres estaba permitida y era la principal fuente de conocimiento médico.", answer: false, justification: "Falso. Estaba prohibida por las creencias religiosas, lo que limitó enormemente el avance de la anatomía." },
-            { question: "La psicología de la Gestalt centró sus estudios principalmente en el aprendizaje por ensayo y error.", answer: false, justification: "Falso. El aprendizaje por ensayo y error fue estudiado por Thorndike. La Gestalt estudió el aprendizaje por 'insight' (comprensión súbita)." },
             { question: "John Locke, con su idea de las 'ideas simples' y 'compuestas', es un representante del Racionalismo.", answer: false, justification: "Falso. Locke es una figura central del Empirismo. Sostenía que todo el conocimiento proviene de la experiencia." },
-            { question: "Las leyes del aprendizaje de Thorndike son consideradas un antecedente de la Psicología de la Gestalt.", answer: false, justification: "Falso. Las leyes de Thorndike, que explican el aprendizaje por asociación, son un antecedente directo del Conductismo." },
             { question: "El método de la introspección experimental de Wundt buscaba explorar los conflictos inconscientes de la personalidad.", answer: false, justification: "Falso. Su método buscaba una descripción controlada de los contenidos inmediatos de la conciencia. La exploración del inconsciente es el terreno del Psicoanálisis." },
             { question: "El censo de 2014 reveló que la inserción de los psicólogos en el Sistema Nacional Integrado de Salud (SNIS) de Uruguay es insuficiente.", answer: true, justification: "Verdadero. Esta fue una de las conclusiones importantes. A pesar del alto número de profesionales, su integración en el sistema público era limitada, contribuyendo a la 'paradoja' del difícil acceso a la atención." },
             { question: "La separación entre Filosofía y Psicología se produce cuando la psicología adopta el modelo científico de las ciencias naturales.", answer: true, justification: "Verdadero. La historia de la psicología como ciencia comienza cuando deja de ser una rama de la filosofía especulativa y adopta el método experimental y la medición para estudiar sus objetos, inspirándose en la física y la fisiología." },
@@ -292,54 +272,350 @@
         ];
 
         const mcQuestions = [
-            // Preguntas Múltiple Opción validadas y/o adaptadas de los parciales
-            { question: "¿Qué palabra describe mejor el panorama de aproximaciones (escuelas, paradigmas, objetos de estudio y métodos) que presenta la psicología en el ámbito académico y científico?", options: ["Unificación", "Consenso", "Diversidad", "Estabilidad"], answer: "Diversidad", justification: "Como se discute en el texto de Arana, la psicología se caracteriza por una marcada diversidad de enfoques, métodos y objetos de estudio, lo que genera una constante tensión y debate interno sobre su identidad como ciencia." },
-            { question: "Para que la psicología aplicada sea considerada científica, ¿en qué debe basarse?", options: ["En la intuición y el sentido común", "En técnicas populares no probadas", "En los conocimientos que la psicología básica haya probado que son científicos", "En la experiencia personal del profesional"], answer: "En los conocimientos que la psicología básica haya probado que son científicos", justification: "La psicología aplicada deriva su legitimidad y eficacia de la investigación básica. Sus intervenciones deben estar fundamentadas en principios y conocimientos que han sido validados a través del método científico." },
-            { question: "¿Cuál de las siguientes opciones describe mejor el objetivo principal de Wilhelm Wundt al fundar el primer laboratorio de psicología?", options: ["Medir las diferencias individuales en inteligencia.", "Analizar la estructura de la experiencia consciente en sus elementos básicos.", "Entender las funciones adaptativas de la conducta.", "Tratar los trastornos mentales a través de la hipnosis."], answer: "Analizar la estructura de la experiencia consciente en sus elementos básicos.", justification: "Wundt, padre de la psicología experimental, buscaba descomponer la conciencia en sus componentes elementales (sensaciones, sentimientos) a través de la introspección experimental. Su objetivo era estructural, no funcional, ni de medición de la inteligencia ni clínico." },
-            { question: "El 'manifiesto conductista' de John B. Watson en 1913 propuso que la psicología debería abandonar el estudio de la conciencia y enfocarse en:", options: ["Los procesos inconscientes.", "La percepción y la memoria.", "La conducta observable.", "Los arquetipos culturales."], answer: "La conducta observable.", justification: "La revolución conductista de Watson consistió precisamente en redefinir la psicología como una ciencia natural, cuyo único objeto de estudio legítimo era la conducta observable, medible y cuantificable, rechazando por completo la introspección y el estudio de la 'mente'." },
-            { question: "¿Qué concepto es fundamental en la teoría de William James y lo diferencia radicalmente del Estructuralismo?", options: ["Los elementos de la conciencia.", "El método de la introspección.", "El 'flujo de la conciencia' (stream of consciousness).", "El condicionamiento clásico."], answer: "El 'flujo de la conciencia' (stream of consciousness).", justification: "Mientras el Estructuralismo intentaba descomponer la mente en 'átomos' estáticos, James insistía en que la conciencia es una corriente continua, personal y siempre cambiante, que no puede ser 'congelada' para su análisis sin destruir su naturaleza." },
-            { question: "¿Cuál fue el principal hallazgo teórico de la Escuela de Wurzburgo bajo la dirección de Oswald Külpe?", options: ["La curva del olvido.", "La existencia del pensamiento sin imágenes.", "Las leyes de la percepción.", "El condicionamiento operante."], answer: "La existencia del pensamiento sin imágenes.", justification: "La Escuela de Wurzburgo desafió la visión empirista tradicional al demostrar experimentalmente que los sujetos podían realizar juicios y resolver problemas sin tener una imagen mental consciente asociada, lo que sugirió que el pensamiento era un proceso más abstracto." },
-            { question: "¿Qué concepto fue postulado por Freud como necesario para explicar fenómenos como los sueños, actos fallidos y síntomas neuróticos?", options: ["La represión.", "El inconsciente.", "La transferencia.", "La sexualidad infantil."], answer: "El inconsciente.", justification: "Freud propuso el inconsciente como la instancia psíquica fundamental donde residen los deseos, recuerdos y conflictos reprimidos que determinan gran parte de nuestra conducta y vida mental, a pesar de no ser accesibles directamente a la conciencia." },
-            { question: "La principal diferencia entre el enfoque de Charcot sobre la histeria y el de la Escuela de Nancy (Bernheim) radicaba en que:", options: ["Charcot usaba hipnosis y la Escuela de Nancy no.", "Charcot creía que la histeria era una enfermedad real, mientras que la Escuela de Nancy la consideraba una simulación.", "Charcot la veía como un estado patológico propio de los histéricos, mientras que la Escuela de Nancy la atribuía a la sugestión, posible en cualquier persona.", "Charcot la trataba en hombres y la Escuela de Nancy solo en mujeres."], answer: "Charcot la veía como un estado patológico propio de los histéricos, mientras que la Escuela de Nancy la atribuía a la sugestión, posible en cualquier persona.", justification: "Para Charcot (Escuela de la Salpêtrière), la capacidad de ser hipnotizado era un signo de un sistema nervioso patológico. Para Bernheim (Escuela de Nancy), era un fenómeno normal producto de la sugestión, posible en casi cualquier persona." },
-            { question: "La 'Ley del Efecto' de Edward Thorndike es considerada un antecedente directo del:", options: ["Condicionamiento clásico de Pavlov.", "Psicoanálisis de Freud.", "Condicionamiento operante de Skinner.", "Estructuralismo de Titchener."], answer: "Condicionamiento operante de Skinner.", justification: "La Ley del Efecto establece que las conductas seguidas de consecuencias satisfactorias se fortalecen. Skinner tomó esta idea como base para su teoría del condicionamiento operante, donde el refuerzo (la consecuencia) es el elemento central que 'opera' sobre la conducta." },
-            { question: "Según Ardila (1969), ¿de qué dos fuentes principales surge la psicología en América Latina?", options: ["De la ciencia natural y la ciencia social.", "Como disciplina práctica (ligada a medicina y educación) y como rama de la filosofía.", "Del psicoanálisis y el conductismo.", "De la psicofísica y la psicometría."], answer: "Como disciplina práctica (ligada a medicina y educación) y como rama de la filosofía.", justification: "Ardila señala que la psicología en la región tuvo este doble origen: por un lado, un interés práctico por resolver problemas concretos y, por otro, la tradición especulativa heredada de la filosofía." },
-            { question: "La Sociedad Interamericana de Psicología (SIP), fundada en 1951, tuvo como objetivo principal:", options: ["Establecer el psicoanálisis como única corriente válida.", "Promover el intercambio de profesionales, literatura y trabajos científicos entre los países de América.", "Criticar los modelos psicológicos europeos y norteamericanos.", "Regular legalmente la profesión en todos los países."], answer: "Promover el intercambio de profesionales, literatura y trabajos científicos entre los países de América.", justification: "La SIP fue y es una organización crucial para crear una red de colaboración y un sentido de identidad para la psicología en todo el continente americano, facilitando la comunicación y el desarrollo conjunto." },
-            { question: "¿Qué acontecimiento marcó el inicio de la segunda etapa del desarrollo de la psicología en Uruguay, según Carrasco (2005)?", options: ["La creación de la Sociedad de Psicología del Uruguay.", "La fundación del Laboratorio de Psicopedagogía en 1933.", "El ingreso de la Psicología en la Universidad de la República.", "La publicación de 'Psicología Elemental' por Vaz Ferreira."], answer: "La fundación del Laboratorio de Psicopedagogía en 1933.", justification: "Carrasco señala este hecho como un punto de inflexión, ya que fue impulsado por una necesidad social concreta (problemas de aprendizaje detectados en un censo escolar) y marcó el inicio de una psicología más aplicada e institucionalizada en el país." },
-            { question: "Según el 1er Censo Nacional en Psicología 2014, ¿cuál es una característica demográfica destacada de la profesión en Uruguay?", options: ["Una distribución equitativa en todo el territorio.", "Un predominio de profesionales hombres.", "Una alta concentración en la zona metropolitana y una marcada feminización.", "Una población envejecida, con la mayoría de profesionales mayores de 60 años."], answer: "Una alta concentración en la zona metropolitana y una marcada feminización.", justification: "El censo confirmó dos tendencias muy fuertes: la gran mayoría de los psicólogos (casi 85%) residen en Montevideo y Canelones, y la profesión es ejercida predominantemente por mujeres (85,1%)." },
-            { question: "¿Cuál fue la principal motivación mencionada por los psicólogos uruguayos en el Censo 2014 para tener más de un trabajo?", options: ["Por inestabilidad laboral.", "Por desarrollo profesional.", "Para obtener mayores ingresos.", "Para ocupar el tiempo libre."], answer: "Para obtener mayores ingresos.", justification: "El 60% de los psicólogos con más de un empleo señaló que la razón principal era la necesidad de complementar sus ingresos, lo que indica una realidad laboral donde un solo trabajo a menudo no es suficiente económicamente." },
-            { question: "El estructuralismo de Titchener propone:", options: ["El estudio de las singularidades de cada individuo.", "La observación participante para delimitar roles grupales.", "El estudio de la mente general del adulto.", "Las diferencias entre la inteligencia animal y la humana."], answer: "El estudio de la mente general del adulto.", justification: "A Titchener no le interesaban las diferencias individuales, ni la psicología infantil, animal o patológica. Su proyecto era una ciencia 'pura' que buscaba las leyes universales de la estructura de la mente del ser humano adulto y normal." },
-            { question: "La psicología de la Gestalt critica al conductismo y al estructuralismo por su enfoque:", options: ["Holístico.", "Funcional.", "Elementarista y atomista.", "Clínico."], answer: "Elementarista y atomista.", justification: "La crítica fundamental de la Gestalt a ambas escuelas es que intentan entender los fenómenos psicológicos complejos (como la percepción o el pensamiento) descomponiéndolos en sus partes más pequeñas (sensaciones o estímulos-respuestas), perdiendo de vista la organización y el significado del todo." },
-            { question: "¿Cuál de las siguientes leyes de la percepción pertenece a la escuela de la Gestalt?", options: ["Ley del Efecto.", "Ley de la Parsimonia.", "Ley de Cierre.", "Ley de la Recapitulación."], answer: "Ley de Cierre.", justification: "La Ley de Cierre, que describe nuestra tendencia a percibir figuras incompletas como si estuvieran completas, es uno de los principios clásicos de la organización perceptual descritos por la psicología de la Gestalt, junto con las leyes de proximidad, similitud, continuidad, etc." },
-            { question: "El funcionalismo, influido por Darwin, considera la vida mental y el comportamiento en términos de:", options: ["Adaptación activa al ambiente.", "Estructuras fijas e innatas.", "Conflictos inconscientes.", "Estímulos y respuestas."], answer: "Adaptación activa al ambiente.", justification: "La pregunta central del funcionalismo es cómo los procesos mentales ayudan al organismo a sobrevivir y adaptarse a su entorno. Es una psicología dinámica, centrada en la utilidad y el propósito de la mente." },
-            { question: "La 'duda metódica' como punto de partida del método científico para alcanzar la verdad fue propuesta por:", options: ["Platón", "Aristóteles", "Francis Bacon", "René Descartes"], answer: "René Descartes", justification: "Descartes propuso dudar de todo aquello que no fuera absolutamente evidente, para así encontrar una primera verdad indubitable ('Pienso, luego existo') sobre la cual reconstruir todo el edificio del conocimiento de manera racional y segura." },
-            { question: "Bleger, al referirse al rol del psicólogo, afirma que su principal instrumento de trabajo es:", options: ["La aplicación de tests psicométricos.", "El método experimental.", "Su propia personalidad.", "Su conocimiento teórico."], answer: "Su propia personalidad.", justification: "Para Bleger, la tarea del psicólogo es inseparable de su persona. El contacto directo con el objeto de estudio y la capacidad de usar su propia subjetividad de manera controlada (disociación instrumental) son condiciones impostergables de su oficio." },
-            { question: "En el campo de la salud mental, el enfoque actual concibe la salud como:", options: ["La ausencia de enfermedades psicofísicas.", "Un concepto integral que incluye determinantes sociales, económicos y la promoción de la salud.", "Un estado puramente biológico atendido por equipos médicos.", "Un aspecto exclusivamente psicológico del sujeto."], answer: "Un concepto integral que incluye determinantes sociales, económicos y la promoción de la salud.", justification: "El enfoque contemporáneo de la salud mental, y de la salud en general, es integral y biopsicosocial. Supera la visión de 'ausencia de enfermedad' para incluir factores sociales, económicos y comunitarios, así como la promoción y prevención." },
-            { question: "La psicología del trabajo y de las organizaciones se ocupa principalmente de:", options: ["Aumentar la productividad a cualquier costo.", "Promover la salud laboral y el bienestar físico, mental y social de los trabajadores.", "Mejorar únicamente los salarios de los empleados.", "Analizar los conflictos inconscientes de los gerentes."], answer: "Promover la salud laboral y el bienestar físico, mental y social de los trabajadores.", justification: "Esta área de la psicología busca optimizar tanto el rendimiento como la calidad de vida en el entorno laboral, abordando factores como el clima organizacional, el estrés, la motivación y la seguridad." },
-            { question: "¿Cuál de las siguientes es una de las principales críticas a la Psicología Experimental de Wundt?", options: ["Que el sujeto es visto como un agente activo y contextualizado.", "Que su método era demasiado holístico e impreciso.", "Que el sujeto es un ente pasivo que reacciona a estímulos, perdiendo su historicidad.", "Que se enfocaba demasiado en las diferencias individuales."], answer: "Que el sujeto es un ente pasivo que reacciona a estímulos, perdiendo su historicidad.", justification: "Los críticos argumentaron que, al descomponer la experiencia en elementos básicos en un laboratorio, se perdía la riqueza y complejidad del ser humano como un todo, transformándolo en un mero reactor a estímulos controlados." },
-            { question: "Abraham Maslow, psicólogo humanista, propone una 'pirámide de las necesidades' humanas en la cual:", options: ["Las necesidades están divididas en cinco categorías, estando en la base las fisiológicas y en la cima la autorrealización.", "Para lograr el reconocimiento es necesario primero satisfacer la autorrealización.", "No hay un orden establecido para la satisfacción de las necesidades.", "Las necesidades de seguridad son las más importantes de todas."], answer: "Las necesidades están divididas en cinco categorías, estando en la base las fisiológicas y en la cima la autorrealización.", justification: "La teoría de Maslow postula una jerarquía donde las necesidades más básicas (como la comida y el refugio) deben ser satisfechas antes de que la persona pueda enfocarse en necesidades superiores como la estima y, finalmente, la autorrealización." },
-            { question: "En el campo de la discapacidad, el modelo social entiende que esta se produce a partir de:", options: ["Una enfermedad neurológica exclusivamente.", "Una relación negativa entre la condición de salud de la persona y un contexto con barreras.", "La incapacidad de la persona para vincularse con su familia.", "La negatividad de la persona para adaptarse al entorno."], answer: "Una relación negativa entre la condición de salud de la persona y un contexto con barreras.", justification: "Este modelo sitúa la discapacidad no en el individuo, sino en la sociedad. La discapacidad surge cuando un entorno no está preparado para la diversidad funcional de las personas, imponiendo barreras físicas, sociales o culturales." },
-            { question: "La visión del 'mundo-máquina' de la Modernidad, resultado de los cambios en la física y la astronomía, tuvo como consecuencia para la psicología:", options: ["El surgimiento de corrientes idealistas.", "La inclusión de la subjetividad como objeto de estudio principal.", "La creación de una ciencia experimental y de laboratorio.", "El rechazo a cualquier método cuantitativo."], answer: "La creación de una ciencia experimental y de laboratorio.", justification: "La idea de que el universo (y por extensión, el cuerpo y la mente) funcionaba como una máquina predecible impulsó el deseo de estudiar los fenómenos psicológicos con el mismo rigor, medición y control que se aplicaba a la física, dando lugar a la psicología experimental." },
-            { question: "Según Bleger, el mito del 'hombre natural' es una falacia que postula que:", options: ["La condición del ser humano es, desde su origen, social.", "Hay un estado o esencia originaria del ser humano que se corrompe por la influencia de la civilización.", "El ser humano no tiene una naturaleza fija.", "La cultura enriquece el estado natural del hombre."], answer: "Hay un estado o esencia originaria del ser humano que se corrompe por la influencia de la civilización.", justification: "Bleger critica esta idea romántica (como la del 'buen salvaje' de Rousseau), argumentando que es una abstracción que niega la condición fundamental del ser humano: ser un producto de sus relaciones sociales y su historia desde el inicio." },
-            { question: "Respecto al dualismo mente-cuerpo, es correcto afirmar que:", options: ["Fue resuelto definitivamente por la psicología experimental.", "Es un problema que la psicología actual ya no considera relevante.", "Se refiere a la concepción de la existencia de dos sustancias opuestas: la material y la espiritual.", "Surgió por primera vez con el Conductismo."], answer: "Se refiere a la concepción de la existencia de dos sustancias opuestas: la material y la espiritual.", justification: "Este es el núcleo del problema filosófico heredado por la psicología, especialmente a partir de Descartes. La tensión entre lo mental (privado, subjetivo) y lo físico (público, observable) ha marcado la historia de la disciplina, generando diversas escuelas y enfoques." },
-            { question: "Las tres áreas de manifestación de la conducta según Bleger son:", options: ["Inconsciente, Preconsciente y Consciente.", "Mente, Cuerpo y Mundo exterior.", "Individuo, Grupo e Institución.", "Estímulo, Respuesta y Consecuencia."], answer: "Mente, Cuerpo y Mundo exterior.", justification: "Bleger postula que toda conducta es una unidad que se manifiesta simultáneamente en estas tres áreas: el área 1 (mente, procesos simbólicos), el área 2 (cuerpo, manifestaciones fisiológicas) y el área 3 (mundo exterior, acciones concretas)." },
-            { question: "La psicología humanista se considera la 'tercera fuerza' porque surge como una reacción crítica a:", options: ["El Estructuralismo y el Funcionalismo.", "La Psicología de la Gestalt y la Psicofísica.", "El Psicoanálisis y el Conductismo.", "El Positivismo y el Empirismo."], answer: "El Psicoanálisis y el Conductismo.", justification: "El humanismo se presentó como una alternativa a las dos grandes escuelas dominantes de la primera mitad del siglo XX. Criticaba al psicoanálisis por su determinismo y su visión pesimista del hombre, y al conductismo por su mecanicismo y por ignorar la conciencia y la experiencia subjetiva." },
-            { question: "¿Cuál de las siguientes expresiones pertenece a José Bleger?", options: ["El todo es más que la suma de sus partes.", "La conducta es una respuesta a un estímulo.", "El estudio de la conducta se hace en función de la personalidad y del inseparable contexto social.", "Conócete a ti mismo."], answer: "El estudio de la conducta se hace en función de la personalidad y del inseparable contexto social.", justification: "Esta frase resume la perspectiva de Bleger, quien se opone a una visión reduccionista de la conducta. Para él, la conducta solo puede ser entendida en su contexto, como una manifestación de la personalidad total en una situación dada." },
-            { question: "La principal contribución de Hermann Ebbinghaus a la psicología experimental fue:", options: ["Fundar el primer laboratorio en Leipzig.", "Medir la velocidad del impulso nervioso.", "Demostrar que los procesos mentales superiores como la memoria podían ser medidos experimentalmente.", "Descubrir el reflejo condicionado."], answer: "Demostrar que los procesos mentales superiores como la memoria podían ser medidos experimentalmente.", justification: "Mientras Wundt se centraba en procesos básicos, Ebbinghaus fue pionero en aplicar el método experimental a un proceso complejo como la memoria, usando sus famosas sílabas sin sentido para garantizar objetividad." },
-            { question: "La 'crisis de desunión' de la psicología se refiere a:", options: ["La falta de psicólogos para atender la demanda.", "La división entre la psicología básica y la aplicada.", "La fragmentación de la disciplina en múltiples escuelas y teorías a menudo incompatibles.", "El conflicto entre la psicología europea y la estadounidense."], answer: "La fragmentación de la disciplina en múltiples escuelas y teorías a menudo incompatibles.", justification: "Este término describe el debate interno sobre la falta de un paradigma unificador en psicología. La coexistencia de enfoques tan dispares como el psicoanálisis, el conductismo y el cognitivismo lleva a cuestionar si se trata de 'una' psicología o de 'muchos' estudios psicológicos." },
-            { question: "La figura de Carlos Vaz Ferreira es crucial en la historia de la psicología en Uruguay porque:", options: ["Fundó la Facultad de Psicología en 1994.", "Publicó 'Psicología Elemental' y propuso crear un laboratorio de investigaciones pedagógicas a fines del siglo XIX.", "Fue el primer presidente de la Sociedad de Psicología del Uruguay.", "Trajo el psicoanálisis a Uruguay."], answer: "Publicó 'Psicología Elemental' y propuso crear un laboratorio de investigaciones pedagógicas a fines del siglo XIX.", justification: "Vaz Ferreira es una figura pionera de la primera etapa de la psicología en Uruguay. Su trabajo y sus propuestas a finales de 1800 y principios de 1900 sentaron las bases para la futura institucionalización de la disciplina en el país." },
-            { question: "¿Qué describe mejor el concepto de 'apercepción' en la teoría de Wundt?", options: ["El simple registro de una sensación.", "Un proceso pasivo de asociación de ideas.", "Un proceso activo y voluntario donde la atención dirige la síntesis de los elementos mentales.", "Un reflejo condicionado."], answer: "Un proceso activo y voluntario donde la atención dirige la síntesis de los elementos mentales.", justification: "La apercepción es el núcleo del 'voluntarismo' de Wundt. No es una simple percepción, sino un acto de la voluntad que organiza activamente los contenidos de la conciencia en una síntesis creativa, donde el todo es más que la suma de sus partes." },
-            { question: "El abandono de la 'teoría de la seducción' por parte de Freud fue un punto de inflexión porque:", options: ["Dejó de usar la hipnosis.", "Comenzó a tratar a pacientes hombres.", "Reconoció el papel fundamental de la fantasía inconsciente en la formación de síntomas.", "Demostró que todos los traumas eran inventados."], answer: "Reconoció el papel fundamental de la fantasía inconsciente en la formación de síntomas.", justification: "Al principio, Freud creía que la neurosis siempre se debía a un abuso sexual real en la infancia. Su abandono de esta teoría significó el descubrimiento del 'mundo interno': la idea de que las fantasías y deseos inconscientes (la realidad psíquica) son tan potentes como la realidad externa para causar patología." },
-            { question: "¿Cuál era la principal crítica de Conwy Lloyd Morgan al trabajo de George Romanes sobre la inteligencia animal?", options: ["Que realizaba demasiados experimentos de laboratorio.", "Su antropomorfismo, es decir, atribuir capacidades humanas complejas a los animales.", "Que no creía en la teoría de la evolución de Darwin.", "Que solo estudiaba a los perros."], answer: "Su antropomorfismo, es decir, atribuir capacidades humanas complejas a los animales.", justification: "Romanes usaba el 'método anecdótico'. Morgan criticó esto proponiendo su 'Canon de Parsimonia': no debemos interpretar una acción animal como el resultado de una facultad psicológica superior si puede explicarse por una más simple. Esto sentó las bases para un estudio más objetivo del comportamiento animal." },
-            { question: "El Plan de Estudios 2013 de la Facultad de Psicología de la Udelar tiene como uno de sus objetivos principales:", options: ["Formar exclusivamente psicoanalistas.", "Priorizar la investigación básica por sobre la práctica profesional.", "Articular enseñanza, investigación y extensión para formar profesionales capaces de actuar en diversos ámbitos.", "Separar completamente la formación clínica de la educativa."], answer: "Articular enseñanza, investigación y extensión para formar profesionales capaces de actuar en diversos ámbitos.", justification: "El plan busca una formación integral, no especializada en una única corriente o campo. La articulación de las tres funciones universitarias (enseñanza, investigación, extensión) es clave para formar un psicólogo crítico y comprometido con la realidad social." },
-            { question: "El empirismo de John Locke, con su idea de la 'tábula rasa', es un antecedente filosófico fundamental para:", options: ["El Racionalismo de Descartes.", "El Innatismo de Galton.", "El Conductismo.", "La Frenología de Gall."], answer: "El Conductismo.", justification: "La idea de Locke de que la mente es una 'hoja en blanco' que se llena con la experiencia es la base del empirismo. El Conductismo es su heredero directo en psicología, al postular que es el ambiente (la experiencia, el aprendizaje) y no los factores innatos lo que determina la conducta." },
-            { question: "La creación del test Stanford-Binet por Lewis Terman supuso un cambio fundamental respecto a la visión de Binet porque:", options: ["Se tradujo del francés al inglés.", "Incorporó el concepto de Coeficiente Intelectual (CI) y una visión innatista de la inteligencia.", "Se empezó a aplicar solo a adultos.", "Eliminó todas las pruebas verbales."], answer: "Incorporó el concepto de Coeficiente Intelectual (CI) y una visión innatista de la inteligencia.", justification: "Mientras Binet veía la inteligencia como funcional y modificable, Terman la re-conceptualizó como una entidad única, fija y hereditaria. La creación del CI permitió cuantificar y jerarquizar esta supuesta capacidad innata, lo que tuvo un enorme impacto social y se alineó con el movimiento eugenésico." },
-            { question: "Según el modelo de Bleger, si un psicólogo interviene en la dinámica de una familia para mejorar su comunicación, está trabajando en el ámbito:", options: ["Psicosocial", "Sociodinámico", "Institucional", "Comunitario"], answer: "Sociodinámico", justification: "Una familia es un grupo. El ámbito sociodinámico se enfoca en el estudio del grupo como unidad, analizando las interacciones, roles y dinámicas que ocurren dentro de él, más allá de la psicología individual de cada miembro (que sería el ámbito psicosocial)." },
-            { question: "¿En qué consiste la 'paradoja' que surge del contacto cotidiano con la formación y los servicios de atención psicológica en Uruguay, según Giménez (2016)?", options: ["Aumento del número de psicólogos y percepción de desborde en los servicios.", "Disminución de la demanda de atención psicológica y aumento de los egresados.", "Alta especialización de los psicólogos, pero falta de servicios básicos.", "Poca oferta de formación de grado y alta demanda laboral."], answer: "Aumento del número de psicólogos y percepción de desborde en los servicios.", justification: "Giménez (2016) plantea la paradoja de que, por un lado, se percibe un notable incremento en el número de psicólogos, y por otro, los servicios de atención se sienten desbordados y no logran absorber la demanda creciente de atención psicológica." },
-            { question: "¿Cuál de los siguientes no es un ámbito de estudio según la diferenciación de Bleger?", options: ["Ámbito psicosocial.", "Ámbito sociodinámico.", "Ámbito institucional.", "Ámbito experimental."], answer: "Ámbito experimental.", justification: "Bleger diferencia los ámbitos psicosocial (individuos), sociodinámico (grupos), institucional (instituciones) y comunitario (comunidad). El ámbito experimental se refiere a un tipo de metodología, no a una delimitación del campo de estudio en el sentido de Bleger." },
-            { question: "¿Cuál es una de las principales conclusiones del 1er Censo Nacional de Psicología 2014 sobre la inserción laboral de los psicólogos en Uruguay?", options: ["La mayoría de los psicólogos trabajan en el sector público.", "La inserción laboral es homogénea en todo el territorio nacional.", "Los principales ámbitos de trabajo son la educación, lo social-comunitario y la clínica particular.", "El desempleo entre los psicólogos es extremadamente bajo."], answer: "Los principales ámbitos de trabajo son la educación, lo social-comunitario y la clínica particular.", justification: "El censo evidenció que estos tres grandes campos son los que agrupan a la mayoría de los psicólogos, mostrando la diversidad de áreas en las que se desempeñan los profesionales en Uruguay." },
-            { question: "¿Qué autor propuso el concepto de 'tabula rasa' (mente como una hoja en blanco) en la filosofía?", options: ["René Descartes.", "Platón.", "John Locke.", "Immanuel Kant."], answer: "John Locke.", justification: "Locke, como representante del empirismo, sostenía que la mente al nacer es una 'hoja en blanco' y que todas las ideas y conocimientos se adquieren a través de la experiencia sensorial." },
-            { question: "¿Qué psicólogo es reconocido por sus estudios sobre el aprendizaje por insight con chimpancés?", options: ["Wolfgang Köhler.", "Max Wertheimer.", "Kurt Koffka.", "Edward Lee Thorndike."], answer: "Wolfgang Köhler.", justification: "Köhler, uno de los fundadores de la Gestalt, realizó famosos experimentos en Tenerife donde demostró que los chimpancés podían resolver problemas de forma súbita y comprensiva (insight), no solo por ensayo y error." }
+            {
+                question: '¿Cuál fue el objetivo principal del 1er Censo Nacional en Psicología en Uruguay en 2014?',
+                options: ['Cuantificar la demanda de atención psicológica en el país.', 'Conocer el perfil sociodemográfico, la formación y el desempeño profesional de los psicólogos.', 'Determinar la eficacia de las políticas de salud mental.', 'Establecer un registro de psicólogos activos en el Sistema Nacional Integrado de Salud (SNIS).'],
+                answer: 'Conocer el perfil sociodemográfico, la formación y el desempeño profesional de los psicólogos.',
+                justification: 'El censo fue motivado por la necesidad de conocer el número de licenciados en psicología en el país, su distribución territorial y condiciones laborales, sirviendo como un **diagnóstico inicial para planificar políticas sanitarias integrales**.'
+            },
+            {
+                question: 'Según el 1er Censo Nacional en Psicología 2014, ¿dónde se concentra la mayoría de los psicólogos censados en Uruguay?',
+                options: ['En el interior del país, para cubrir las necesidades regionales.', 'De forma equitativa entre Montevideo y el interior.', 'En Montevideo, con un 72.8%, y un 85% si se suma Canelones.', 'Predominantemente en Canelones, por su cercanía a la capital.'],
+                answer: 'En Montevideo, con un 72.8%, y un 85% si se suma Canelones.',
+                justification: 'La distribución de psicólogos censados en 2014 muestra que el **72.8% reside en Montevideo**, y al incluir Canelones, el porcentaje asciende al 85%. Esto indica una **alta concentración en la zona metropolitana**.'
+            },
+            {
+                question: '¿Qué porcentaje de la población de psicólogos censada en Uruguay en 2014 son mujeres?',
+                options: ['Aproximadamente el 50%.', 'Alrededor del 70%.', 'El 85.1%.', 'Menos del 40%.'],
+                answer: 'El 85.1%.',
+                justification: 'La Tabla 3 del censo (Distribución de psicólogos censados según sexo) indica que **el 85.1% son mujeres** (6417 psicólogas). Este dato es también mencionado como una **"feminización de la profesión"**.'
+            },
+            {
+                question: '¿Cuál es la franja de edad con mayor concentración de psicólogos censados en Uruguay según el censo de 2014?',
+                options: ['Entre 23 y 29 años.', 'Entre 30 y 39 años, concentrando el 34.1%.', 'Entre 40 y 49 años.', 'Más de 60 años.'],
+                answer: 'Entre 30 y 39 años, concentrando el 34.1%.',
+                justification: 'La Tabla 4 del censo (Distribución de psicólogos por tramos de edad) muestra que la franja de edad **entre 30 y 39 años agrupa el 34.1%** de los psicólogos censados. La población es mayoritariamente joven, con una media de 41 años, y **tres cuartas partes tienen menos de 49 años**.'
+            },
+            {
+                question: '¿Cuál es la principal institución de formación universitaria de psicólogos en Uruguay según los datos hasta 2014?',
+                options: ['La Universidad Católica Dámaso Antonio Larrañaga (UCUDAL).', 'El Instituto de Filosofía, Ciencias y Letras.', 'La Universidad de la República (UDELAR), con el 88% de los graduados.', 'La Escuela de Tecnología Médica.'],
+                answer: 'La Universidad de la República (UDELAR), con el 88% de los graduados.',
+                justification: 'Los datos hasta el año 2014 muestran que de los 10.317 psicólogos egresados, el **88% lo hicieron en la UDELAR**, lo que la convierte en la principal institución formadora a nivel de grado.'
+            },
+            {
+                question: '¿Qué porcentaje de los psicólogos censados en Uruguay en 2014 afirmaron haber recibido ingresos por trabajo en el último año?',
+                options: ['El 57.7%.', 'Aproximadamente el 80%.', 'El 91.2%.', 'Menos del 50%.'],
+                answer: 'El 91.2%.',
+                justification: 'Según el censo, el **91.2% de los psicólogos censados sí trabaja** (6877 de 7543), afirmando haber recibido ingresos por trabajo en el último año.'
+            },
+            {
+                question: '¿Cuál es la principal área de inserción profesional de los psicólogos en Uruguay, según el censo de 2014, cuando se agrupan las áreas?',
+                options: ['Social-comunitario.', 'Educación y Salud, con porcentajes muy similares.', 'Institucional-organizacional.', 'Clínica privada.'],
+                answer: 'Educación y Salud, con porcentajes muy similares.',
+                justification: 'Al agrupar las áreas de inserción, **Educación y Salud son las más mencionadas**, seguidas de cerca por Social-comunitario. La clínica particular es también un campo muy frecuente.'
+            },
+            {
+                question: '¿Cuál es una de las principales limitaciones de los datos previos al censo de 2014 para conocer la situación de los psicólogos en Uruguay?',
+                options: ['La falta de interés de los psicólogos en participar en relevamientos.', 'La fragmentación y dispersión de los registros existentes y la carencia de una política de seguimiento a egresados.', 'La ausencia de un Colegio de Psicólogos en el país.', 'El poco apoyo del Ministerio de Salud Pública a este tipo de estudios.'],
+                answer: 'La fragmentación y dispersión de los registros existentes y la carencia de una política de seguimiento a egresados.',
+                justification: 'Se señaló como una limitación importante la **fragmentación y dispersión de los registros existentes, expresiva también de la carencia de una política de seguimiento a egresados**.'
+            },
+            {
+                question: '¿Cómo se describe la psicología latinoamericana en la primera mitad del siglo XX?',
+                options: ['Como una disciplina homogénea y unificada.', 'Definida por la llegada de muchos referentes europeos que emigraron por razones políticas.', 'Centrada exclusivamente en la investigación básica.', 'Principalmente como una rama de la filosofía.'],
+                answer: 'Definida por la llegada de muchos referentes europeos que emigraron por razones políticas.',
+                justification: 'La psicología latinoamericana de la primera mitad del siglo XX está **definida por la llegada de muchos referentes que emigraron de países europeos por razones políticas**, recepcionando las grandes teorías o autores originarios, mostrando un carácter receptivo.'
+            },
+            {
+                question: '¿Quién fundó el primer laboratorio de psicología experimental en Latinoamérica en 1898?',
+                options: ['Carlos Vaz Ferreira.', 'Waclaw Radecki.', 'Horacio Piñero en Buenos Aires.', 'Emilio Mira y López.'],
+                answer: 'Horacio Piñero en Buenos Aires.',
+                justification: 'La psicología científica comienza en Latinoamérica en 1898, año en el cual **Horacio Piñero funda el primer laboratorio de psicología experimental en el Colegio Nacional de Buenos Aires**.'
+            },
+            {
+                question: '¿Cuál es una característica distintiva de la psicología latinoamericana según diversas fuentes?',
+                options: ['Su fuerte énfasis en la teoría pura y la investigación básica.', 'Su independencia total de otras disciplinas.', 'Su gran importancia a la utilidad y su íntima relación con la medicina y la educación.', 'Su enfoque exclusivo en el psicoanálisis.'],
+                answer: 'Su gran importancia a la utilidad y su íntima relación con la medicina y la educación.',
+                justification: 'La psicología en Latinoamérica surge, en parte, como una **disciplina práctica que trató de colaborar con otras disciplinas, especialmente medicina y educación**, dándole gran importancia a la utilidad.'
+            },
+            {
+                question: '¿Qué figura es reconocida por haber organizado las conferencias de Freud en Estados Unidos y fundar la American Psychological Association (APA)?',
+                options: ['William James.', 'Edward B. Titchener.', 'Granville Stanley Hall.', 'John Watson.'],
+                answer: 'Granville Stanley Hall.',
+                justification: '**Granville Stanley Hall** creó la American Psychological Association (APA) y organizó las **conferencias de Freud que introdujeron el psicoanálisis en Norteamérica**.'
+            },
+            {
+                question: 'Según Arana et al. (2006), ¿cuál es una de las palabras que mejor refleja el panorama de la psicología en el ámbito académico y científico?',
+                options: ['Unidad.', 'Consenso.', 'Diversidad.', 'Especialización.'],
+                answer: 'Diversidad.',
+                justification: '"En el ámbito académico y científico, lejos del acuerdo, es la **diversidad la palabra que mejor refleja el panorama de aproximaciones** (escuelas, paradigmas, objetos de estudio y métodos) que presenta la psicología".'
+            },
+            {
+                question: '¿Cómo se distingue la "psicología básica" de la "psicología aplicada"?',
+                options: ['La psicología básica es teórica y la aplicada es práctica, sin conexión entre ellas.', 'La psicología aplicada es la que realizan los psicólogos en ejercicio, mientras que la básica se centra en la investigación y se lleva a cabo principalmente en el ámbito académico.', 'La psicología básica solo se ocupa de problemas triviales, mientras que la aplicada aborda problemas importantes.', 'La psicología aplicada es científica, mientras que la básica no lo es.'],
+                answer: 'La psicología aplicada es la que realizan los psicólogos en ejercicio, mientras que la básica se centra en la investigación y se lleva a cabo principalmente en el ámbito académico.',
+                justification: 'La distinción se hace "fundamentalmente en el ámbito académico de la universidad, donde se lleva a cabo la investigación básica". La psicología aplicada "ha de estar basada en los conocimientos que la psicología básica haya probado que son científicos".'
+            },
+            {
+                question: '¿Qué autor definió la psicología como la "ciencia de la actividad humana, considerando también como actividad el procesamiento de la información"?',
+                options: ['John B. Watson.', 'Sigmund Freud.', 'Mayor (1985).', 'Wilhelm Wundt.'],
+                answer: 'Mayor (1985).',
+                justification: 'Influido por el conductismo y la psicología cognitiva, Mayor (1985) propone la psicología como la "**ciencia de la actividad humana**, considerando también como actividad el procesamiento de la información".'
+            },
+            {
+                question: '¿Cuál es la principal razón de la diversidad en la psicología, legado de sus orígenes en la filosofía?',
+                options: ['La juventud de la ciencia psicológica.', 'La complejidad y singularidad de su objeto de estudio.', 'El dualismo inherente a los datos con que trabaja (ej., mente y cerebro, conciencia y organismo).', 'La falta de interés de los psicólogos en unificar la disciplina.'],
+                answer: 'El dualismo inherente a los datos con que trabaja (ej., mente y cerebro, conciencia y organismo).',
+                justification: 'La principal razón de esta situación "estriba en el **dualismo con que la psicología ha convivido desde siempre, legado indiscutible de sus orígenes en la filosofía**". Este dualismo se expresa en antinomias como espíritu/materia o mente/cerebro.'
+            },
+            {
+                question: '¿Qué psicólogo es conocido por sus estudios sobre el comportamiento de los gatos en "cajas problema" y por formular la ley del efecto?',
+                options: ['Iván Pavlov.', 'John B. Watson.', 'B.F. Skinner.', 'Edward Lee Thorndike.'],
+                answer: 'Edward Lee Thorndike.',
+                justification: '**Edward Lee Thorndike** se centró en la investigación con **gatos en cajas problema** y estableció la **ley del efecto**, base del aprendizaje instrumental.'
+            },
+            {
+                question: '¿Qué concepto fundamental introduce Iván Pavlov a través de sus experimentos con perros?',
+                options: ['La inhibición experimental.', 'La neurosis experimental.', 'La discriminación de estímulos.', 'El reflejo condicionado.'],
+                answer: 'El reflejo condicionado.',
+                justification: 'Pavlov es conocido por sus investigaciones sobre el **reflejo condicionado**, demostrando que los perros comenzaban a salivar al oír una campana o ver una luz que anticipaba la comida.'
+            },
+            {
+                question: '¿Qué autor propuso el modelo estímulo-organismo-respuesta (E-O-R) para la psicología?',
+                options: ['John B. Watson.', 'Edward Lee Thorndike.', 'Iván Pavlov.', 'Robert S. Woodworth.'],
+                answer: 'Robert S. Woodworth.',
+                justification: '**Woodworth** "definió la psicología como el estudio de los procesos mentales y la conducta, introduciendo el **modelo estímulo-organismo-respuesta**, en donde se subraya la importancia de los procesos mediacionales que actúan entre los estímulos que recibimos y las respuestas producidas".'
+            },
+            {
+                question: '¿Cuál fue el principal aporte de Wilhelm Wundt a la psicología científica?',
+                options: ['La formulación de la teoría psicodinámica.', 'El desarrollo del método de la asociación libre.', 'La creación de los primeros tests de inteligencia.', 'La fundación del primer laboratorio oficial de psicología experimental en Leipzig en 1879.'],
+                answer: 'La fundación del primer laboratorio oficial de psicología experimental en Leipzig en 1879.',
+                justification: 'Es habitual considerar a **Wilhelm Wundt como el fundador de la psicología científica** por haber fundado el "primer laboratorio oficial de psicología experimental, en la Universidad de Leipzig".'
+            },
+            {
+                question: '¿Qué método experimental utilizó Wilhelm Wundt en su laboratorio de Leipzig para estudiar la conciencia?',
+                options: ['La autoobservación desorganizada.', 'La introspección experimental o percepción interna.', 'El análisis del comportamiento observable.', 'La observación correlacional.'],
+                answer: 'La introspección experimental o percepción interna.',
+                justification: 'Wundt "desarrolló una técnica de **introspección que denominó percepción interna**, y que no tenía nada que ver con el análisis desorganizado de la autoobservación que habitualmente realizaban los filósofos".'
+            },
+            {
+                question: '¿Cuál fue el enfoque principal de Hermann Ebbinghaus en sus estudios experimentales?',
+                options: ['La percepción y la sensación.', 'La inteligencia y las diferencias individuales.', 'La memoria, el aprendizaje y el olvido mediante sílabas sin sentido.', 'Los procesos mentales superiores como el lenguaje.'],
+                answer: 'La memoria, el aprendizaje y el olvido mediante sílabas sin sentido.',
+                justification: 'Hermann Ebbinghaus "extendió la psicología experimental al estudio de los procesos superiores, como la **memoria, procesos de aprendizaje y el olvido mediante la repetición de sílabas sin sentido**".'
+            },
+            {
+                question: '¿Qué psicólogo acuñó el término "cociente de inteligencia (CI)" y desarrolló el test Stanford-Binet?',
+                options: ['Alfred Binet.', 'Francis Galton.', 'James McKeen Cattell.', 'Lewis M. Terman.'],
+                answer: 'Lewis M. Terman.',
+                justification: '**Lewis M. Terman** "fue quien adaptó el test de Binet para los estudiantes americanos... El test pasó a llamarse **Stanford-Binet**... Terman es también conocido por haber **acuñado uno de los términos más populares de la psicología: el cociente de inteligencia (CI)**".'
+            },
+            {
+                question: '¿Cuál de las siguientes afirmaciones describe la visión de Francis Galton sobre las capacidades humanas?',
+                options: ['Se deben principalmente a factores ambientales y la educación.', 'Son moldeables y cambian con la experiencia.', 'Pueden deberse a factores hereditarios, siendo la inteligencia una pieza clave en el desarrollo de la especie.', 'No pueden ser medidas de forma fiable.'],
+                answer: 'Pueden deberse a factores hereditarios, siendo la inteligencia una pieza clave en el desarrollo de la especie.',
+                justification: 'Galton "le hizo plantearse la posibilidad de que la inteligencia hubiese sido una pieza clave en el desarrollo de nuestra especie, y que las **diferencias de aptitud entre unos seres humanos y otros pudieran deberse a factores hereditarios**".'
+            },
+            {
+                question: '¿Qué modelo teórico introdujo John B. Watson como una alternativa al estudio de la conciencia?',
+                options: ['El Psicoanálisis.', 'El Funcionalismo.', 'El Conductismo, centrado en la conducta observable.', 'El Estructuralismo.'],
+                answer: 'El Conductismo, centrado en la conducta observable.',
+                justification: 'John Watson, influenciado por la crisis de la psicología experimental y la crítica a la introspección, propuso un "**Modelo de la ciencia natural. Objeto de estudio: la conducta**".'
+            },
+            {
+                question: '¿Cuál es una de las "tres preocupaciones" actuales de Juan Carlos Carrasco (2005) respecto a la psicología en Uruguay?',
+                options: ['La falta de interés de los estudiantes por la disciplina.', 'El escaso número de egresados de las facultades.', 'La profusión de titulaciones de Postgrados y el consecuente descreimiento de su validez de contenido.', 'La ausencia de un código de ética profesional.'],
+                answer: 'La profusión de titulaciones de Postgrados y el consecuente descreimiento de su validez de contenido.',
+                justification: 'Carrasco menciona como segunda preocupación "la **profusión actual de titulaciones de Postgrados y un consecuente descreimiento de su validez de contenido** en función de la ligereza que algunas instituciones tienen en su producción".'
+            },
+            {
+                question: '¿Qué importante acontecimiento marca el inicio de la tercera etapa del desarrollo de la psicología en Uruguay, según Carrasco (2005)?',
+                options: ['La fundación de la Asociación Psicoanalítica del Uruguay (APU).', 'La creación del Laboratorio de Psicopedagogía.', 'El ingreso de la Psicología como disciplina en la Universidad de la República y la fundación de la Sociedad de Psicología del Uruguay.', 'La aprobación de la Ley de Reglamentación del ejercicio de la profesión de Psicólogo.'],
+                answer: 'El ingreso de la Psicología como disciplina en la Universidad de la República y la fundación de la Sociedad de Psicología del Uruguay.',
+                justification: 'Carrasco afirma que el comienzo de la tercer etapa (desde 1950) está "signada por dos acontecimientos que considero de suma relevancia histórica: el **ingreso de la Psicología como disciplina en la Universidad Mayor de la República y la fundación de la Sociedad de Psicología del Uruguay**".'
+            },
+            {
+                question: '¿Qué suceso llevó a la Sociedad de Psiquiatría del Uruguay a denunciar "intrusismo médico" por parte de los psicólogos en 1956?',
+                options: ['El establecimiento de centros privados de formación de psicólogos.', 'La publicación de nuevos libros de psicología médica.', 'La promoción del pensamiento y técnica psicoanalítica, junto con la creación de la Asociación Psicoanalítica del Uruguay (APU).', 'La incursión de los psicólogos en el ámbito de la psicometría.'],
+                answer: 'La promoción del pensamiento y técnica psicoanalítica, junto con la creación de la Asociación Psicoanalítica del Uruguay (APU).',
+                justification: 'La "promoción del pensamiento y técnica psicoanalítica conjuntamente con la creación de la Asociación Psicoanalítica del Uruguay (APU) en el año 1956 **determinaron una explícita situación de alarma a nivel de la Sociedad de Psiquiatría del Uruguay, la cual radicó una denuncia de intrusismo médico**".'
+            },
+            {
+                question: 'Según Carrasco (2005), ¿cómo se desarrolló la psicología en Uruguay durante el período de la Dictadura (1973-1985)?',
+                options: ['La enseñanza de la psicología fue completamente prohibida.', 'Se promovió una única corriente teórica oficial.', 'Numerosos docentes de la UDELAR pasaron a enseñar en un instituto privado (Instituto de Filosofía Ciencias y Letras), y funcionaron grupos de estudio privados, predominantemente de Psicoanálisis y Psicología Social.', 'Se creó la Facultad de Psicología de la Universidad Pública del Estado.'],
+                answer: 'Numerosos docentes de la UDELAR pasaron a enseñar en un instituto privado (Instituto de Filosofía Ciencias y Letras), y funcionaron grupos de estudio privados, predominantemente de Psicoanálisis y Psicología Social.',
+                justification: 'Durante la dictadura, "numerosos docentes de la Universidad de la República pasaron a enseñar en ese **Instituto privado... También existieron otros grupos menos numerosos donde se hizo docencia de diagnóstico**".'
+            },
+            {
+                question: '¿Qué se entiende por "campo" en psicología según José Bleger, retomando a Pichón Rivière?',
+                options: ['Un espacio físico fijo donde se realiza la práctica profesional.', 'La delimitación de una disciplina por su objeto y método.', 'Una delimitación en el espacio y tiempo de un fenómeno, que es la totalidad de los elementos que interaccionan en ese espacio y tiempo.', 'La especialización de un psicólogo en un área específica.'],
+                answer: 'Una delimitación en el espacio y tiempo de un fenómeno, que es la totalidad de los elementos que interaccionan en ese espacio y tiempo.',
+                justification: 'Bleger "entiende por “campo”, una **delimitación en el espacio y tiempo de un fenómeno; es la totalidad de los elementos que interaccionan en ese espacio y tiempo**".'
+            },
+            {
+                question: '¿Cómo se describe la psicología contemporánea según diversas fuentes?',
+                options: ['Caracterizada por la unidad y el consenso en sus enfoques.', 'Como una disciplina que ha agotado su modelo de ciencia natural.', 'Por la amplitud y diversidad de intereses, actividades y objetivos, con diversidad de enfoques y controversias.', 'Como una ciencia puramente básica sin aplicaciones prácticas.'],
+                answer: 'Por la amplitud y diversidad de intereses, actividades y objetivos, con diversidad de enfoques y controversias.',
+                justification: 'La psicología contemporánea se caracteriza por la **amplitud y diversidad de intereses, actividades y objetivos**. Los psicólogos están lejos de llegar a un acuerdo sobre los problemas... la **diversidad y el desacuerdo son características de muchas ramas de las ciencias modernas**.'
+            },
+            {
+                question: '¿Cuál es el significado del "Principio de Parsimonia" o "Canon de Lloyd Morgan" en la psicología animal?',
+                options: ['Los animales aprenden por imitación de conductas complejas.', 'Las explicaciones del comportamiento animal deben recurrir a facultades psicológicas superiores.', 'No se debe interpretar el comportamiento de un animal como resultado de una facultad psicológica superior si puede explicarse como la consecuencia del uso de una facultad más simple.', 'Toda conducta animal es puramente instintiva.'],
+                answer: 'No se debe interpretar el comportamiento de un animal como resultado de una facultad psicológica superior si puede explicarse como la consecuencia del uso de una facultad más simple.',
+                justification: 'El "Principio de Parsimonia" o "Canon de Lloyd Morgan" establece que "no se deberá interpretar el comportamiento de un animal como el resultado de una facultad psicológica superior, mientras **pueda explicarse como la consecuencia del uso de una facultad más simple**".'
+            },
+            {
+                question: '¿Qué teoría propuso Charles Darwin que alteró la distinción radical entre animales y seres humanos?',
+                options: ['La frenología.', 'La heredabilidad de los caracteres adquiridos.', 'La teoría de la evolución biológica por selección natural.', 'La teoría tricromática de la percepción del color.'],
+                answer: 'La teoría de la evolución biológica por selección natural.',
+                justification: '**Charles Darwin** es la figura más relevante de la historia de la biología, y su "detallada exposición de los mecanismos de la **evolución biológica alteró el punto de vista que suponía una distinción radical entre los animales y los seres humanos**".'
+            },
+            {
+                question: '¿Cuál de las siguientes no es una característica de la psicología como disciplina humanística, según la tabla de Staats (1987)?',
+                options: ['Eventos subjetivos.', 'Holístico (hombre como un todo).', 'Precisión y medida.', 'Comprensión.'],
+                answer: 'Precisión y medida.',
+                justification: 'La tabla 1 de Arana et al. (2006), "Características de la psicología como disciplina humanística o como ciencia experimental", lista "Precisión y medida" como una característica de la **psicología experimental**, no humanística.'
+            },
+            {
+                question: '¿Quién fue el primer pionero de la psicología en Perú, un psicólogo alemán que llegó a Lima en 1934?',
+                options: ['Honorio Delgado.', 'Walter Blumenfeld.', 'Emilio Mira y López.', 'Waclaw Radecki.'],
+                answer: 'Walter Blumenfeld.',
+                justification: '"El primer pionero de la psicología en el Perú fue **Walter Blumenfeld**, un psicólogo alemán que llegó a Lima en 1934 y organizó el Instituto de Psicología Experimental y Psicotecnia de la Universidad de San Marcos".'
+            },
+            {
+                question: '¿Cuál de las siguientes afirmaciones no es una crítica común a la psicología experimental de Wundt?',
+                options: ['El individuo en estudio es un sujeto pasivo, que reacciona a estímulos, sin historicidad.', 'Se pierden la reflexión sobre el conocimiento y el sujeto.', 'Se descomponen fenómenos complejos en elementos simples.', 'Su énfasis en la aplicación práctica de la psicología en la sociedad.'],
+                answer: 'Su énfasis en la aplicación práctica de la psicología en la sociedad.',
+                justification: 'Las críticas a la psicología experimental incluyen que el sujeto es pasivo, se pierde la reflexión, se descomponen fenómenos y se busca la neutralidad. Wundt, de hecho, "desdeñaba la aplicación práctica de la psicología" en sus primeros años.'
+            },
+            {
+                question: '¿Cuál de los siguientes inventos del siglo XIX no se menciona en las fuentes como parte del contexto sociohistórico del surgimiento del Psicoanálisis?',
+                options: ['El teléfono.', 'El avión.', 'La anestesia.', 'El automóvil.'],
+                answer: 'El automóvil.',
+                justification: 'El contexto sociohistórico del Psicoanálisis a fines del siglo XIX (1880-1900) menciona inventos como la **anestesia, el teléfono, el avión y la radio**, pero no el automóvil.'
+            },
+            {
+                question: '¿Qué concepto filosófico se retomó con fuerza en el Neo-romanticismo a fines del siglo XIX, influyendo en la posterior teoría de los sueños de Freud?',
+                options: ['El racionalismo.', 'El materialismo.', 'La idea del Inconsciente y lo onírico.', 'El dualismo mente-cuerpo.'],
+                answer: 'La idea del Inconsciente y lo onírico.',
+                justification: 'El **Neo-romanticismo le dio importancia a lo onírico** y la "mayoría de los filósofos de la época admitían la **existencia de una vida mental inconsciente**". Las obras de Schemer, Maury y Hervey de Saint-Denis sobre los sueños fueron básicas para Freud.'
+            },
+            {
+                question: '¿Qué fue la Escuela de Salpêtrière y quién fue su figura principal, en el contexto del surgimiento de la psiquiatría dinámica?',
+                options: ['Una escuela en Alemania que se enfocaba en las causas físicas de las enfermedades mentales, liderada por Wilhelm Wundt.', 'Una escuela en Francia que defendía la sugestión como base de la hipnosis, liderada por Hippolyte Bernheim.', 'Una escuela en Francia, liderada por Jean Martin Charcot, que estudió la histeria y comprobó que sus síntomas no tenían causas orgánicas.', 'Un centro de investigación en Uruguay fundado por Waclaw Radecki.'],
+                answer: 'Una escuela en Francia, liderada por Jean Martin Charcot, que estudió la histeria y comprobó que sus síntomas no tenían causas orgánicas.',
+                justification: 'La "Escuela de Salpêtrière" fue liderada por "**Jean Martin Charcot**, Neurólogo francés... Estudió la histeria y los estados nerviosos... **Comprobó que los síntomas histéricos no tenían causas orgánicas**".'
+            },
+            {
+                question: '¿Qué método terapéutico abandonó Sigmund Freud en su práctica clínica, a pesar de haberlo utilizado al principio?',
+                options: ['La asociación libre.', 'El análisis de los sueños.', 'La hipnosis y la sugestión.', 'La interpretación de los actos fallidos.'],
+                answer: 'La hipnosis y la sugestión.',
+                justification: 'Freud "Utilizó la **hipnosis y la sugestión** para tratar la histeria, luego **abandonó este método porque la sintomatología volvía a aparecer y el paciente no lo recordaba**".'
+            },
+            {
+                question: '¿Qué figura es considerada un "organizador" clave de la psicología americana, fundador de varias revistas y dedicado a la psicología genética (hoy del desarrollo)?',
+                options: ['William James.', 'John Dewey.', 'Edward Lee Thorndike.', 'Granville Stanley Hall.'],
+                answer: 'Granville Stanley Hall.',
+                justification: '**Granville Stanley Hall** "creó la American Psychological Association (APA)... Fundó el American Journal of Psychology y algunas revistas más... En cuanto a su trabajo de investigación, Hall se dedicó esencialmente a lo que hoy llamaríamos **psicología evolutiva y que él denominó psicología genética**".'
+            },
+            {
+                question: '¿Quién propuso que la inteligencia es una capacidad destinada a la adaptación de las personas al medio?',
+                options: ['Francis Galton.', 'James McKeen Cattell.', 'Lewis M. Terman.', 'Alfred Binet.'],
+                answer: 'Alfred Binet.',
+                justification: '**Alfred Binet** "decidió desarrollar sus test de inteligencia... para identificar en la educación obligatoria a los alumnos que él llamaba débiles mentales... Sí propuso, sin embargo, que la **inteligencia era una capacidad destinada a la adaptación de las personas al medio**".'
+            },
+            {
+                question: '¿Qué se entiende por "psicofísica" según Gustav Fechner?',
+                options: ['El estudio de las enfermedades mentales de origen físico.', 'La relación entre la actividad cerebral y los procesos mentales.', 'La ciencia que estudia la relación matemática entre el mundo físico y el mundo de la sensación.', 'La aplicación de los principios de la física a la psicología.'],
+                answer: 'La ciencia que estudia la relación matemática entre el mundo físico y el mundo de la sensación.',
+                justification: 'Fechner "Le llamó **PSICOFÍSICA a la ciencia que estudiaba esa relación** [entre las sensaciones y los estímulos que la producían]".'
+            },
+            {
+                question: '¿Qué característica distingue la situación de los psicólogos en Uruguay en comparación con Argentina, según Giménez (2016)?',
+                options: ['Argentina tiene una mayor concentración de psicólogos en su capital.', 'Uruguay tiene menos revistas de psicología publicadas.', 'Uruguay tiene una tasa más alta de psicólogos por cada 100 mil habitantes.', 'Argentina tiene una mayor feminización de la profesión.'],
+                answer: 'Uruguay tiene una tasa más alta de psicólogos por cada 100 mil habitantes.',
+                justification: 'La Tabla 7 de Giménez (2016) muestra que Argentina tiene 214 psicólogos por cada 100 mil habitantes, mientras que Uruguay tiene 263, lo que indica que **Uruguay supera a Argentina en términos relativos a su población**.'
+            },
+            {
+                question: '¿Qué importante reforma en la Universidad de la República (UDELAR) en 1958 definió sus funciones en docencia, investigación y extensión universitaria?',
+                options: ['La creación de la Facultad de Psicología.', 'La aprobación de la Ley de Reglamentación del ejercicio de la profesión de Psicólogo.', 'La aprobación por parte del Parlamento Nacional de su nueva Ley Orgánica.', 'El establecimiento de la Sociedad de Psicología del Uruguay.'],
+                answer: 'La aprobación por parte del Parlamento Nacional de su nueva Ley Orgánica.',
+                justification: 'En 1958 se produjo una gran reforma con la **aprobación de su nueva Ley Orgánica**, la cual determinó su autonomía y democratizó su estructura interna, asumiendo el modelo latinoamericano de Universidades con funciones en docencia, investigación y extensión.'
+            },
+            {
+                question: '¿Cuál es el rango de duración de la carrera de psicólogo/a en Uruguay según el 1er Censo Nacional de Psicología 2014?',
+                options: ['Menos de 5 años.', '7.5 años en promedio, con poca diferencia según el sexo.', '10 años o más.', 'No se especifica la duración en años.'],
+                answer: '7.5 años en promedio, con poca diferencia según el sexo.',
+                justification: 'La Tabla 12 del censo (Duración de la carrera) muestra que la **duración promedio de la carrera es de 7.5 años**, con 7.7 años para hombres y 7.5 años para mujeres, "siendo poco significativa la diferencia según sexo".'
+            },
+            {
+                question: '¿Qué autor es conocido por decir que la psicología es "lo que hacen los psicólogos"?',
+                options: ['Wilhelm Wundt.', 'Sigmund Freud.', 'Eysenck (1968) o Deutsch (1978).', 'José Bleger.'],
+                answer: 'Eysenck (1968) o Deutsch (1978).',
+                justification: 'Arana et al. (2006) mencionan que "mostrando su carácter pragmático, algunos autores dicen que la psicología es “**lo que hacen los psicólogos**” (Eysenck, 1968; Deutsch, 1978)".'
+            },
+            {
+                question: 'Según Giménez (2016), ¿qué implica la alta numerosidad de los estudios de grado en Psicología en Uruguay para la formación?',
+                options: ['Que la calidad de la formación se ha estandarizado y es superior.', 'Que ya no hay demanda suficiente para los egresados.', 'Que genera desafíos adicionales para pensar el tipo de dispositivos que aseguren formación de calidad y personalizada.', 'Que la formación se ha vuelto puramente teórica, sin prácticas.'],
+                answer: 'Que genera desafíos adicionales para pensar el tipo de dispositivos que aseguren formación de calidad y personalizada.',
+                justification: 'Giménez (2016) señala que la "alta numerosidad... genera **desafíos adicionales para pensar el tipo de dispositivos que aseguren formación de calidad, en un campo disciplinario donde resulta necesario alcanzar ciertos grados mínimos de personalización**".'
+            },
+            {
+                question: 'Para que la psicología aplicada sea considerada científica, ¿en qué debe basarse?',
+                options: ['En la intuición y el sentido común', 'En técnicas populares no probadas', 'En los conocimientos que la psicología básica haya probado que son científicos', 'En la experiencia personal del profesional'],
+                answer: 'En los conocimientos que la psicología básica haya probado que son científicos',
+                justification: 'La psicología aplicada deriva su legitimidad y eficacia de la investigación básica. Sus intervenciones deben estar fundamentadas en principios y conocimientos que han sido validados a través del método científico.'
+            },
+            {
+                question: '¿Qué concepto es fundamental en la teoría de William James y lo diferencia radicalmente del Estructuralismo?',
+                options: ['Los elementos de la conciencia.', 'El método de la introspección.', "El 'flujo de la conciencia' (stream of consciousness).", 'El condicionamiento clásico.'],
+                answer: "El 'flujo de la conciencia' (stream of consciousness).",
+                justification: "Mientras el Estructuralismo intentaba descomponer la mente en 'átomos' estáticos, James insistía en que la conciencia es una corriente continua, personal y siempre cambiante, que no puede ser 'congelada' para su análisis sin destruir su naturaleza."
+            },
+            {
+                question: 'La "duda metódica" como punto de partida del método científico para alcanzar la verdad fue propuesta por:',
+                options: ['Platón', 'Aristóteles', 'Francis Bacon', 'René Descartes'],
+                answer: 'René Descartes',
+                justification: 'Descartes propuso dudar de todo aquello que no fuera absolutamente evidente, para así encontrar una primera verdad indubitable ("Pienso, luego existo") sobre la cual reconstruir todo el edificio del conocimiento de manera racional y segura.'
+            },
+            {
+                question: 'Bleger, al referirse al rol del psicólogo, afirma que su principal instrumento de trabajo es:',
+                options: ['La aplicación de tests psicométricos.', 'El método experimental.', 'Su propia personalidad.', 'Su conocimiento teórico.'],
+                answer: 'Su propia personalidad.',
+                justification: 'Para Bleger, la tarea del psicólogo es inseparable de su persona. El contacto directo con el objeto de estudio y la capacidad de usar su propia subjetividad de manera controlada (disociación instrumental) son condiciones impostergables de su oficio.'
+            },
+            {
+                question: 'Las tres áreas de manifestación de la conducta según Bleger son:',
+                options: ['Inconsciente, Preconsciente y Consciente.', 'Mente, Cuerpo y Mundo exterior.', 'Individuo, Grupo e Institución.', 'Estímulo, Respuesta y Consecuencia.'],
+                answer: 'Mente, Cuerpo y Mundo exterior.',
+                justification: 'Bleger postula que toda conducta es una unidad que se manifiesta simultáneamente en estas tres áreas: el área 1 (mente, procesos simbólicos), el área 2 (cuerpo, manifestaciones fisiológicas) y el área 3 (mundo exterior, acciones concretas).'
+            },
+            {
+                question: "La 'crisis de desunión' de la psicología se refiere a:",
+                options: ['La falta de psicólogos para atender la demanda.', 'La división entre la psicología básica y la aplicada.', 'La fragmentación de la disciplina en múltiples escuelas y teorías a menudo incompatibles.', 'El conflicto entre la psicología europea y la estadounidense.'],
+                answer: 'La fragmentación de la disciplina en múltiples escuelas y teorías a menudo incompatibles.',
+                justification: 'Este término describe el debate interno sobre la falta de un paradigma unificador en psicología. La coexistencia de enfoques tan dispares como el psicoanálisis, el conductismo y el cognitivismo lleva a cuestionar si se trata de "una" psicología o de "muchos" estudios psicológicos.'
+            },
+            {
+                question: 'El empirismo de John Locke, con su idea de la "tábula rasa", es un antecedente filosófico fundamental para:',
+                options: ['El Racionalismo de Descartes.', 'El Innatismo de Galton.', 'El Conductismo.', 'La Frenología de Gall.'],
+                answer: 'El Conductismo.',
+                justification: "La idea de Locke de que la mente es una 'hoja en blanco' que se llena con la experiencia es la base del empirismo. El Conductismo es su heredero directo en psicología, al postular que es el ambiente (la experiencia, el aprendizaje) y no los factores innatos lo que determina la conducta."
+            },
+            {
+                question: 'La creación del test Stanford-Binet por Lewis Terman supuso un cambio fundamental respecto a la visión de Binet porque:',
+                options: ['Se tradujo del francés al inglés.', 'Incorporó el concepto de Coeficiente Intelectual (CI) y una visión innatista de la inteligencia.', 'Se empezó a aplicar solo a adultos.', 'Eliminó todas las pruebas verbales.'],
+                answer: 'Incorporó el concepto de Coeficiente Intelectual (CI) y una visión innatista de la inteligencia.',
+                justification: 'Mientras Binet veía la inteligencia como funcional y modificable, Terman la re-conceptualizó como una entidad única, fija y hereditaria. La creación del CI permitió cuantificar y jerarquizar esta supuesta capacidad innata, lo que tuvo un enorme impacto social y se alineó con el movimiento eugenésico.'
+            },
+            {
+                question: '¿Qué autor propuso el concepto de "tabula rasa" (mente como una hoja en blanco) en la filosofía?',
+                options: ['René Descartes.', 'Platón.', 'John Locke.', 'Immanuel Kant.'],
+                answer: 'John Locke.',
+                justification: "Locke, como representante del empirismo, sostenía que la mente al nacer es una 'hoja en blanco' y que todas las ideas y conocimientos se adquieren a través de la experiencia sensorial."
+            }
         ];
+
 
         let currentQuestions = [];
         let currentQuestionIndex = 0;
@@ -417,6 +693,11 @@
                 currentQuestions = baseQuestions;
             }
             
+            // Update button text with question count
+            document.querySelector(`button[onclick="startQuiz('tf')"]`).textContent = `Verdadero o Falso (${tfQuestions.length} Preguntas)`;
+            document.querySelector(`button[onclick="startQuiz('mc')"]`).textContent = `Múltiple Opción (${mcQuestions.length} Preguntas)`;
+
+
             userAnswers = new Array(currentQuestions.length).fill(null);
             
             menuScreen.classList.remove('active');
@@ -591,6 +872,9 @@
         function goToMenu() {
             scoreScreen.classList.remove('active');
             menuScreen.classList.add('active');
+            // Reset button text on menu return
+            document.querySelector(`button[onclick="startQuiz('tf')"]`).textContent = `Verdadero o Falso`;
+            document.querySelector(`button[onclick="startQuiz('mc')"]`).textContent = `Múltiple Opción`;
         }
 
         function toggleAudio() {
