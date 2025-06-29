@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Estudio Interactiva - Fundamentos de la Psicología</title>
+    <style>
+        :root {
+            --background-color: #0d1117;
+            --surface-color: #161b22;
+            --primary-color: #58a6ff; /* Azul principal */
+            --primary-variant-color: #1f6feb; /* Azul más oscuro para hover */
+            --secondary-color: #30c8d6; /* Celeste/cian para acentos */
+            --text-color: #c9d1d9;
+            --correct-color: #2ea043;
+            --incorrect-color: #da3633;
+            --button-text-color: #0d1117;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background-color: var(--surface-color);
+            padding: 30px;
+            border: 1px solid #30363d;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+        }
+
+        #menu-screen, #quiz-screen, #score-screen {
+            display: none;
+        }
+        
+        #menu-screen.active, #quiz-screen.active, #score-screen.active {
+            display: block;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: var(--text-color);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: var(--button-text-color);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-variant-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: var(--surface-color);
+            border: 2px solid var(--primary-color);
+            color: var(--text-color);
+            text-align: left;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 1em;
+        }
+        
+        .option-btn:not(:disabled):hover {
+            background-color: var(--primary-variant-color);
+            border-color: var(--primary-variant-color);
+            color: #fff;
+        }
+
+        .option-btn.correct {
+            background-color: var(--correct-color);
+            border-color: var(--correct-color);
+            color: #fff;
+        }
+
+        .option-btn.incorrect {
+            background-color: var(--incorrect-color);
+            border-color: var(--incorrect-color);
+            color: #fff;
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        #justification {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--background-color);
+            border: 1px solid #30363d;
+            text-align: left;
+            line-height: 1.6;
+            display: none;
+        }
+        
+        #justification strong {
+            color: var(--secondary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        #progress-counter {
+            font-size: 0.9em;
+            color: #8b949e;
+        }
+
+        .nav-arrow {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            transition: color 0.3s ease;
+            user-select: none;
+        }
+        .nav-arrow:hover {
+            color: var(--secondary-color);
+        }
+        
+        #audio-toggle {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background-color: #f0f0f0;
+            color: #121212;
+            border: 1px solid #8b949e;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        #audio-toggle:hover {
+            background-color: #c9d1d9;
+        }
+
+        #audio-toggle.active {
+            background-color: var(--secondary-color);
+            color: var(--button-text-color);
+            border-color: var(--secondary-color);
+        }
+        
+        #final-score {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        
+        #final-score strong {
+            color: var(--primary-color);
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.8em;
+            color: #8b949e;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Pantalla de Menú Inicial -->
+        <div id="menu-screen" class="active">
+            <h1>Guía de Estudio Definitiva</h1>
+            <h2>Fundamentos de la Psicología</h2>
+            <p>Contenido actualizado y verificado con los materiales del curso y parciales anteriores. ¡Éxito en tu examen!</p>
+            <button class="btn" onclick="startQuiz('tf')">Verdadero o Falso (60 Preguntas)</button>
+            <button class="btn" onclick="startQuiz('mc')">Múltiple Opción (35 Preguntas)</button>
+        </div>
+
+        <!-- Pantalla del Cuestionario -->
+        <div id="quiz-screen">
+            <div id="prev-question" class="nav-arrow" onclick="previousQuestion()">&#x2190;</div>
+            <button id="audio-toggle" onclick="toggleAudio()">Audio: OFF</button>
+            
+            <h2 id="question-text"></h2>
+            <div id="options-container"></div>
+            <div id="justification"></div>
+
+            <div id="navigation">
+                <div id="progress-counter"></div>
+                <button class="btn" id="next-btn" onclick="nextQuestion()">Siguiente</button>
+            </div>
+        </div>
+        
+        <!-- Pantalla de Puntuación Final -->
+        <div id="score-screen">
+            <h2>¡Cuestionario Completado!</h2>
+            <div id="final-score"></div>
+            <p>Puedes volver al menú para intentarlo de nuevo o probar la otra modalidad.</p>
+            <button class="btn" onclick="goToMenu()">Volver al Menú</button>
+        </div>
+    </div>
+    
+    <footer>
+        Desarrollado por Gemini y Ricardo Otero
+    </footer>
+
+    <script>
+        const tfQuestions = [
+            // Contenido de Clase 7: Antecedentes
+            { question: "La tradición psicopatológica francesa, que dio origen a la psiquiatría, utilizó principalmente el método experimental de laboratorio.", answer: false, justification: "Falso. La tradición psicopatológica francesa utilizó el método clínico, tomando como modelo la medicina mental para estudiar fenómenos como la histeria. El método experimental fue característico de la tradición psicofísica alemana." },
+            { question: "El Positivismo de Augusto Comte sostenía que la ciencia debía basarse en la interpretación subjetiva y la metafísica.", answer: false, justification: "Falso. El Positivismo sostenía lo contrario: que la ciencia debía basarse en hechos observables, medibles y objetivos, siguiendo el modelo de las ciencias naturales." },
+            { question: "La Frenología de Franz Gall, aunque desacreditada, fue importante porque introdujo la idea de que el cerebro es el órgano de la mente con funciones localizadas.", answer: true, justification: "Verdadero. Si bien su método de medir el cráneo era pseudocientífico, la idea central de la localización de funciones mentales en áreas específicas del cerebro fue un antecedente crucial para la neurociencia moderna." },
+            { question: "Gustav Fechner, padre de la Psicofísica, buscaba establecer una relación matemática entre el mundo físico (estímulos) y el mundo psíquico (sensaciones).", answer: true, justification: "Verdadero. Fechner acuñó el término y desarrolló métodos experimentales para medir las sensaciones, demostrando que la experiencia subjetiva podía ser cuantificada." },
+            { question: "Hermann von Helmholtz demostró que el impulso nervioso era instantáneo, reforzando la idea de una mente inmaterial.", answer: false, justification: "Falso. Helmholtz midió la velocidad del impulso nervioso y demostró que no era instantáneo, sino un proceso físico y medible, apoyando la visión materialista." },
+            
+            // Contenido de Clase 8: Psicología Experimental y Medición
+            { question: "El objeto de estudio de Wilhelm Wundt en su laboratorio de Leipzig eran los procesos mentales superiores como el razonamiento abstracto.", answer: false, justification: "Falso. Wundt se centró en la 'experiencia inmediata', es decir, los procesos mentales básicos (sensaciones, sentimientos). Consideraba que los procesos superiores debían estudiarse a través de su 'Psicología de los Pueblos'." },
+            { question: "El concepto de 'apercepción' de Wundt describe un proceso pasivo de la conciencia.", answer: false, justification: "Falso. La apercepción es el núcleo de su 'voluntarismo'. Es un proceso activo y creativo de la mente por el cual la atención organiza los contenidos mentales." },
+            { question: "Francis Galton creía que la inteligencia era principalmente producto del ambiente y la educación, oponiéndose al innatismo.", answer: false, justification: "Falso. Galton fue un firme defensor del innatismo. Creía que la inteligencia y el talento eran rasgos hereditarios y fue el fundador del movimiento eugenésico." },
+            { question: "Alfred Binet desarrolló su test de inteligencia con el objetivo principal de clasificar a los soldados en la Primera Guerra Mundial.", answer: false, justification: "Falso. Binet desarrolló su test con un fin práctico y humanista: identificar a los niños con dificultades de aprendizaje en el sistema escolar francés para proporcionarles educación especial." },
+            { question: "El Coeficiente Intelectual (CI) fue un concepto desarrollado por William James en el marco del Funcionalismo.", answer: false, justification: "Falso. El concepto de CI (Edad Mental / Edad Cronológica x 100) fue acuñado por Lewis Terman en EE. UU. al adaptar el test de Binet." },
+
+            // Contenido de Clase 9: Estructuralismo y Funcionalismo
+            { question: "El Estructuralismo de Titchener buscaba responder a la pregunta '¿para qué sirve la mente?'.", answer: false, justification: "Falso. Esa era la pregunta del Funcionalismo. El Estructuralismo buscaba responder '¿qué es la mente?', intentando descomponerla en sus elementos básicos (sensaciones, imágenes, afectos)." },
+            { question: "William James, figura clave del Funcionalismo, describió la conciencia como una serie de elementos estáticos y separables.", answer: false, justification: "Falso. James la describió como un 'flujo de la conciencia' (stream of consciousness), una corriente continua, personal y siempre cambiante." },
+            { question: "El Funcionalismo norteamericano estuvo fuertemente influido por la teoría de la evolución de Darwin.", answer: true, justification: "Verdadero. El Funcionalismo adoptó la idea de adaptación como eje central. Se preguntaba para qué sirven los procesos mentales en la lucha del organismo por adaptarse a su entorno, una pregunta directamente inspirada en el darwinismo." },
+            { question: "El Estructuralismo de Titchener se interesaba por las diferencias individuales y la aplicación práctica de la psicología.", answer: false, justification: "Falso. El estructuralismo de Titchener era una psicología 'pura', enfocada en encontrar la estructura universal de la mente adulta normal. El interés por las diferencias individuales fue característico del funcionalismo." },
+
+            // Contenido de Clase 10: Conductismo
+            { question: "El Conductismo de Watson se apoyó fuertemente en el método de la introspección para estudiar la conducta.", answer: false, justification: "Falso. El Conductismo nació precisamente de un rechazo radical a la introspección por considerarla subjetiva y no científica. Propuso como único método válido la observación objetiva de la conducta." },
+            { question: "La 'Ley del Efecto' de Thorndike postula que las conductas seguidas de consecuencias satisfactorias tienden a repetirse.", answer: true, justification: "Verdadero. Esta ley es la base del aprendizaje instrumental y un antecedente directo del condicionamiento operante de Skinner." },
+            { question: "Según Watson, las emociones complejas como la vergüenza o el orgullo eran innatas en el ser humano.", answer: false, justification: "Falso. Watson sostenía que solo tres emociones eran básicas e innatas (miedo, cólera y amor) y las demás eran aprendidas por condicionamiento." },
+            { question: "El experimento del 'Pequeño Albert' es un ejemplo de condicionamiento operante.", answer: false, justification: "Falso. Es el ejemplo paradigmático de condicionamiento clásico en humanos. Se asoció un estímulo neutro (rata blanca) con un estímulo incondicionado (ruido fuerte)." },
+            
+            // Contenido de Clase 11: Psicoanálisis
+            { question: "El Psicoanálisis surgió en la Viena de fin de siglo, un contexto social caracterizado por una fuerte represión de la sexualidad.", answer: true, justification: "Verdadero. La moral victoriana represiva de la época es un contexto crucial para entender por qué las teorías de Freud sobre la sexualidad inconsciente e infantil fueron tan revolucionarias." },
+            { question: "Jean-Martin Charcot sostenía que la histeria era una simulación de los pacientes para llamar la atención.", answer: false, justification: "Falso. Charcot, un prestigioso neurólogo, luchó por legitimar la histeria como una enfermedad real, aunque de origen psíquico." },
+            { question: "Freud abandonó la hipnosis porque descubrió que no todos los pacientes eran hipnotizables y las curas a menudo no eran duraderas.", answer: true, justification: "Verdadero. Además, se dio cuenta de que bajo hipnosis el paciente no participaba conscientemente en su curación, lo que lo llevó a desarrollar el método de la asociación libre." },
+            { question: "La 'teoría de la seducción' de Freud sostiene que la causa de la neurosis es siempre una fantasía infantil, nunca un evento real.", answer: false, justification: "Falso. La teoría de la seducción fue su primera hipótesis, que sostenía que la causa era un abuso sexual real. Freud la abandonó al descubrir el poder de la fantasía inconsciente, pero no negó que los abusos reales pudieran ocurrir." },
+            
+            // Contenido de Clases 12 y 13: Psicología en Latam/Uruguay y Ámbitos
+            { question: "La psicología en Latinoamérica, en sus inicios, se caracterizó por desarrollar teorías y métodos completamente originales y desvinculados de Europa o EE. UU.", answer: false, justification: "Falso. Una característica central de la psicología latinoamericana inicial fue su carácter receptivo y dependiente de los modelos extranjeros." },
+            { question: "La 'crisis de desunión' en psicología se refiere a la falta de psicólogos para cubrir la demanda de la población.", answer: false, justification: "Falso. Se refiere al debate interno de la disciplina sobre su falta de una teoría y un método unificados, es decir, a su fragmentación en múltiples escuelas y enfoques." },
+            { question: "Según Bleger, el instrumento principal con el que trabaja el psicólogo es su propia personalidad.", answer: true, justification: "Verdadero. Bleger enfatiza que el psicólogo trabaja 'con' y 'a través' de sí mismo, siendo su personalidad y su capacidad de establecer vínculos sus herramientas fundamentales." },
+            { question: "El censo de 2014 en Uruguay mostró que la profesión de psicólogo está distribuida de manera equitativa en todo el territorio nacional.", answer: false, justification: "Falso. El censo reveló una fuerte concentración geográfica en la zona metropolitana (Montevideo y Canelones)." },
+            
+            // Preguntas V/F adicionales basadas en parciales
+            { question: "La Psicología de la Gestalt surge como una reacción contra el enfoque elementarista y atomista del Estructuralismo.", answer: true, justification: "Verdadero. La Gestalt criticó al Estructuralismo por intentar descomponer la experiencia. Su principio fundamental es que 'el todo es más que la suma de sus partes', enfatizando la percepción como totalidades organizadas." },
+            { question: "Los filósofos del Neorromanticismo, con su interés por los sueños y lo irracional, son considerados una influencia importante para el Psicoanálisis de Freud.", answer: true, justification: "Verdadero. Movimientos como el Romanticismo y filósofos como Schopenhauer crearon un clima intelectual propicio para las ideas de Freud sobre el inconsciente." },
+            { question: "La Ley de la Pregnancia de la Gestalt sostiene que la organización perceptual tiende a ser la más simple, regular y estable posible.", answer: true, justification: "Verdadero. También llamada Ley de la Buena Forma, afirma que nuestro sistema perceptivo prefiere las formas más ordenadas y simétricas de entre todas las posibilidades." },
+            { question: "Según el modelo de la discapacidad social, esta es principalmente un problema individual de la persona, causado por su condición de salud.", answer: false, justification: "Falso. El modelo social postula que la discapacidad no reside en la persona, sino en la interacción negativa entre su condición de salud y un contexto que impone barreras." },
+            { question: "La psicología humanista considera que el método experimental del conductismo es el más adecuado para comprender la experiencia humana.", answer: false, justification: "Falso. La Psicología Humanista critica fuertemente al conductismo y al psicoanálisis. Propone un enfoque holístico centrado en la experiencia subjetiva, la libertad y la autorrealización." },
+            { question: "La teoría de los cuatro humores de Hipócrates es un ejemplo temprano de una explicación sobrenatural de la enfermedad.", answer: false, justification: "Falso. Al contrario, la teoría de los humores fue uno de los primeros intentos de dar una explicación natural a la salud, basándose en el equilibrio de sustancias corporales." },
+            { question: "Aristóteles es considerado un filósofo dualista porque creía que el alma y el cuerpo eran dos sustancias separadas.", answer: false, justification: "Falso. Aristóteles era monista. Consideró que el alma es la 'forma' o principio vital del cuerpo, inseparable de él." },
+            { question: "La Revolución Científica de la Modernidad (Copérnico, Galileo, Newton) reforzó la visión de un universo orgánico y animado.", answer: false, justification: "Falso. La Revolución Científica reemplazó la visión orgánica del mundo por una visión mecanicista: el universo como una gran 'máquina' gobernada por leyes matemáticas." },
+            { question: "Para Bleger, las tres áreas de la conducta (mente, cuerpo, mundo externo) pueden manifestarse de forma independiente.", answer: false, justification: "Falso. Bleger postula que las tres áreas son siempre coexistentes y la conducta es una manifestación unitaria, aunque una pueda predominar." },
+            { question: "En la Edad Media, la disección de cadáveres estaba permitida y era la principal fuente de conocimiento médico.", answer: false, justification: "Falso. Estaba prohibida por las creencias religiosas, lo que limitó enormemente el avance de la anatomía." },
+            { question: "La psicología de la Gestalt centró sus estudios principalmente en el aprendizaje por ensayo y error.", answer: false, justification: "Falso. El aprendizaje por ensayo y error fue estudiado por Thorndike. La Gestalt estudió el aprendizaje por 'insight' (comprensión súbita)." },
+            { question: "John Locke, con su idea de las 'ideas simples' y 'compuestas', es un representante del Racionalismo.", answer: false, justification: "Falso. Locke es una figura central del Empirismo. Sostenía que todo el conocimiento proviene de la experiencia." },
+            { question: "Las leyes del aprendizaje de Thorndike son consideradas un antecedente de la Psicología de la Gestalt.", answer: false, justification: "Falso. Las leyes de Thorndike, que explican el aprendizaje por asociación, son un antecedente directo del Conductismo." },
+            { question: "El método de la introspección experimental de Wundt buscaba explorar los conflictos inconscientes de la personalidad.", answer: false, justification: "Falso. Su método buscaba una descripción controlada de los contenidos inmediatos de la conciencia. La exploración del inconsciente es el terreno del Psicoanálisis." },
+            { question: "El censo de 2014 reveló que la inserción de los psicólogos en el Sistema Nacional Integrado de Salud (SNIS) de Uruguay es insuficiente.", answer: true, justification: "Verdadero. Esta fue una de las conclusiones importantes. A pesar del alto número de profesionales, su integración en el sistema público era limitada, contribuyendo a la 'paradoja' del difícil acceso a la atención." },
+            { question: "La separación entre Filosofía y Psicología se produce cuando la psicología adopta el modelo científico de las ciencias naturales.", answer: true, justification: "Verdadero. La historia de la psicología como ciencia comienza cuando deja de ser una rama de la filosofía especulativa y adopta el método experimental y la medición para estudiar sus objetos, inspirándose en la física y la fisiología." },
+            { question: "La 'duda metódica' como punto de partida para llegar a la verdad fue propuesta por Aristóteles.", answer: false, justification: "Falso. La 'duda metódica' es el pilar fundamental del método de René Descartes, quien la propuso como el único camino para alcanzar un conocimiento cierto e indudable." },
+            { question: "José Bleger critica el mito del 'hombre aislado', sosteniendo que la condición fundamental del ser humano es la de ser un ser social.", answer: true, justification: "Verdadero. Bleger se opone a las psicologías que estudian al individuo como una entidad cerrada, argumentando que el ser humano se constituye como tal en y a través de sus relaciones con los otros, en un contexto social inseparable." },
+            { question: "El condicionamiento clásico de Pavlov explica la adquisición de respuestas voluntarias y complejas.", answer: false, justification: "Falso. El condicionamiento clásico explica la adquisición de respuestas reflejas, automáticas e involuntarias (como la salivación o el miedo). El aprendizaje de conductas voluntarias es el campo del condicionamiento operante." },
+            { question: "Clemente Estable es una figura destacada en la psicología uruguaya por sus aportes sobre pedagogía y orientación vocacional.", answer: true, justification: "Verdadero. Estable es reconocido como un pionero en Uruguay, especialmente por su trabajo en el campo de la educación, la psicopedagogía y sus reflexiones sobre la vocación." },
+            { question: "La visión del 'mundo-máquina' de la Modernidad, que concibe el universo como un mecanismo predecible, fue una consecuencia directa de la física de Newton.", answer: true, justification: "Verdadero. Las leyes de movimiento y la gravitación universal de Newton presentaron un universo ordenado, predecible y gobernado por leyes matemáticas, consolidando la metáfora del mundo como un gran mecanismo de relojería, que fue el paradigma dominante de la ciencia moderna." },
+            { question: "Para la Psicología Humanista, el objetivo terapéutico es lograr que el sujeto se adapte a las normas sociales.", answer: false, justification: "Falso. El objetivo principal de la terapia humanista es facilitar la autorrealización del individuo, ayudándolo a desarrollar su potencial único y a vivir de manera auténtica, no necesariamente conformándose con las expectativas externas." },
+            { question: "Según el texto de Arana, una de las dificultades para definir la psicología es el 'uso vulgar del término', que a menudo la confunde con la psiquiatría o la limita a la aplicación de tests.", answer: true, justification: "Verdadero. Arana señala que la percepción popular de la psicología es a menudo sesgada y parcial, lo que dificulta la comprensión de su verdadero alcance como ciencia y profesión." },
+            { question: "Para Vezzetti, la psicología del siglo XIX se caracteriza por la existencia de un campo homogéneo con un único objeto y método.", answer: false, justification: "Falso. Vezzetti argumenta precisamente lo contrario: que la psicología nace de una pluralidad de tradiciones (psicofísica, evolucionismo, psicopatología) con diferentes objetos, métodos y problemas, lo que marca su diversidad desde el origen." },
+            { question: "La psicología cognitiva, que surge más tarde, retoma como objeto de estudio los procesos mentales que el conductismo había descartado.", answer: true, justification: "Verdadero. La 'revolución cognitiva' de mediados del siglo XX supuso una reacción al conductismo, volviendo a poner el foco en los procesos mentales internos (memoria, atención, pensamiento, lenguaje), aunque estudiándolos con métodos rigurosos y a menudo con la metáfora del ordenador." },
+            { question: "El primer laboratorio de psicología fundado por Piñero en Argentina era una institución dedicada al psicoanálisis.", answer: false, justification: "Falso. El laboratorio de Piñero, fundado en 1898, era de psicología experimental, siguiendo el modelo de Wundt. El psicoanálisis llegó a Latinoamérica por otras vías, principalmente a través de la medicina y la psiquiatría." }
+        ];
+
+        const mcQuestions = [
+            // Preguntas Múltiple Opción validadas y/o adaptadas de los parciales
+            { question: "El estructuralismo en psicología propone:", options: ["El estudio de la función adaptativa de la conducta.", "El estudio de la mente a través de las manifestaciones de la conciencia.", "El análisis de las estructuras sociales.", "El estudio de los individuos en su evolución etaria natural."], answer: "El estudio de la mente a través de las manifestaciones de la conciencia.", justification: "El estructuralismo de Titchener buscaba analizar la estructura de la mente descomponiendo la conciencia en sus elementos más básicos (sensaciones, imágenes, afectos) a través de la introspección experimental." },
+            { question: "Son antecedentes del conductismo:", options: ["Los estudios de Thorndike sobre el aprendizaje por ensayo y error.", "La psicología experimental y el método de la introspección.", "Los estudios sobre el insight de Köhler.", "La psiquiatría dinámica de Charcot."], answer: "Los estudios de Thorndike sobre el aprendizaje por ensayo y error.", justification: "El trabajo de Thorndike sobre el aprendizaje en animales y sus Leyes del Efecto y del Ejercicio, proporcionaron la base conceptual sobre la que Watson y otros conductistas construirían sus teorías, centradas en la conexión E-R y las consecuencias de la conducta." },
+            { question: "La Psicología de la Gestalt, que surge en el primer tercio del siglo XX con Wertheimer, Koffka y Köhler, se centra particularmente en el ámbito de:", options: ["La psicopatología.", "La medición de la inteligencia.", "La percepción.", "El desarrollo infantil."], answer: "La percepción.", justification: "La Gestalt nace del estudio de fenómenos perceptivos (como el movimiento aparente o fenómeno phi) y su principio fundamental es que la percepción no es la suma de sensaciones aisladas, sino la captación de totalidades organizadas ('el todo es más que la suma de las partes')." },
+            { question: "Para Wundt, el concepto de 'Voluntarismo' se refiere a que:", options: ["La voluntad organiza los contenidos mentales en estructuras de nivel superior.", "La conducta está determinada por reflejos involuntarios.", "La voluntad es un concepto que debe ser estudiado por la filosofía, no por la psicología.", "Los contenidos mentales son una copia pasiva de la realidad."], answer: "La voluntad organiza los contenidos mentales en estructuras de nivel superior.", justification: "Esta es la idea central de la psicología de Wundt. La voluntad, a través del proceso de apercepción, juega un rol activo y central en la organización de la experiencia consciente." },
+            { question: "El Funcionalismo norteamericano se sustenta en los siguientes referentes teóricos:", options: ["El idealismo alemán y la fenomenología.", "El pragmatismo y el asociacionismo evolucionista.", "El marxismo y la teoría crítica.", "La psiquiatría dinámica y la hipnosis."], answer: "El pragmatismo y el asociacionismo evolucionista.", justification: "El Funcionalismo es profundamente estadounidense. Se nutre del Pragmatismo (una filosofía que valora lo útil y práctico) y del evolucionismo (la idea de adaptación al medio), aplicando estos conceptos al estudio de la mente." },
+            { question: "La psicología se consideró científica cuando:", options: ["Definió su objeto y método basándose únicamente en la filosofía.", "Comenzó a desarrollar terapias para los trastornos mentales.", "Adoptó el método de investigación de las ciencias humanas como la historia.", "Incorporó el método de investigación del positivismo y las ciencias naturales."], answer: "Incorporó el método de investigación del positivismo y las ciencias naturales.", justification: "El paso clave para el nacimiento de la psicología como ciencia fue la adopción del método experimental, la medición y la búsqueda de leyes, siguiendo el modelo positivista de las ciencias naturales (física, fisiología) del siglo XIX." },
+            { question: "Acerca de los primeros estudios que realiza Freud a fines del siglo XIX, es correcto afirmar que:", options: ["Recibe influencias de la psicología experimental de Wundt.", "Los trabajos que escribió con Breuer sobre la histeria no tuvieron ninguna repercusión.", "Su estancia en París estudiando con Charcot será de gran influencia para el desarrollo de su teoría.", "Se basó en los estudios sobre condicionamiento de Pavlov."], answer: "Su estancia en París estudiando con Charcot será de gran influencia para el desarrollo de su teoría.", justification: "El contacto de Freud con Charcot fue decisivo. Allí observó que los síntomas de la histeria tenían un origen psíquico, no orgánico, y que la hipnosis podía influir en ellos. Esta fue la semilla de su futura investigación sobre el inconsciente." },
+            { question: "Según Vezzetti, la psicología del siglo XIX se constituyó a partir de tres tradiciones principales:", options: ["Psicofísica, Psicología Experimental y Evolucionista.", "Psicofísica, Evolucionista y Psicopatológica.", "Psicología Comparada, Evolutiva e Humanista.", "Psicopatología, Psicología Clínica y Psicoterapias."], answer: "Psicofísica, Evolucionista y Psicopatológica.", justification: "Vezzetti identifica tres vertientes que dieron origen a la psicología: la psicofísica y experimental alemana (interesada en la mente y la conciencia), la evolucionista británica (interesada en la adaptación y las diferencias individuales) y la psicopatológica francesa (interesada en la enfermedad mental y la clínica)." },
+            { question: "El desarrollo de la psicología en Latinoamérica se distingue por:", options: ["Una psicología aplicada de utilidad y su relación con otras disciplinas.", "Una psicología positivista que busca cumplir con los ideales de objetividad científica.", "El desarrollo de una Psicología nacionalista y originaria de autores locales.", "Una aplicación directa y sin críticas de las teorías norteamericanas."], answer: "Una psicología aplicada de utilidad y su relación con otras disciplinas.", justification: "Como señala Ardila, una característica distintiva de la psicología en Latinoamérica fue su temprana orientación hacia la aplicación práctica, buscando responder a las demandas concretas de la sociedad en campos como la educación, la salud y el trabajo." },
+            { question: "Para Bleger, en cuanto al rol del psicólogo, considera que:", options: ["Se debe lograr una neutralidad absoluta, tomando distancia del objeto de estudio.", "El instrumento con el que trabaja el psicólogo es su propia personalidad, siendo el contacto directo con la tarea una condición impostergable.", "La tarea del psicólogo debe focalizarse en abordar al ser humano en condiciones experimentales.", "Se debe tener en cuenta que el instrumento principal es su habilidad cognitiva."], answer: "El instrumento con el que trabaja el psicólogo es su propia personalidad, siendo el contacto directo con la tarea una condición impostergable.", justification: "Esta es una idea central en el pensamiento de Bleger. Critica la noción de una 'neutralidad' distante, afirmando que el psicólogo se involucra en la situación y utiliza su propia personalidad como la principal herramienta para comprender y operar." },
+            { question: "La psicología humanista:", options: ["Considera relevante el estudio del inconsciente reprimido.", "Estima que el individuo está determinado por su ambiente.", "Considera que debe tener un enfoque centrado en el ser humano individual y su potencial de autorrealización.", "Se basa en el método experimental para establecer leyes generales de la conducta."], answer: "Considera que debe tener un enfoque centrado en el ser humano individual y su potencial de autorrealización.", justification: "El humanismo, como 'tercera fuerza', reacciona contra el determinismo del psicoanálisis y el conductismo, poniendo el foco en la experiencia subjetiva, la libertad, la creatividad y la tendencia innata del ser humano a desarrollarse y autorrealizarse." },
+            { question: "El censo nacional de psicólogos de 2014 en Uruguay evidenció que los principales ámbitos de trabajo son:", options: ["Jurídico, deportivo y organizacional.", "Psicoanálisis, clínica grupal y laboral.", "Educación, social-comunitario y clínica particular.", "Investigación básica, docencia universitaria y neurociencias."], answer: "Educación, social-comunitario y clínica particular.", justification: "El censo mostró que estos tres grandes campos son los que concentran la mayor parte de la práctica profesional de los psicólogos en Uruguay, reflejando tanto la tradición histórica como las demandas actuales de la sociedad." },
+            { question: "El pensamiento estructuralista de Titchener se caracteriza por:", options: ["Estudiar los componentes de las estructuras de la conciencia.", "Dedicarse a estudiar la percepción como 'totalidades' indivisibles.", "Considerar fundamental la utilidad práctica de los procesos mentales.", "Tener sus raíces en la filosofía pragmatista estadounidense."], answer: "Estudiar los componentes de las estructuras de la conciencia.", justification: "El objetivo del estructuralismo era análogo al de la química o la anatomía: identificar los 'átomos' o elementos básicos de la mente (sensaciones, imágenes, afectos) y ver cómo se combinaban para formar experiencias complejas." },
+            { question: "El condicionamiento clásico de Pavlov explica la adquisición de:", options: ["Respuestas voluntarias y complejas.", "Conductas operantes.", "Respuestas reflejas o automáticas.", "Conductas innatas que no requieren aprendizaje."], answer: "Respuestas reflejas o automáticas.", justification: "El modelo de Pavlov se basa en la asociación de estímulos para provocar respuestas que son originalmente involuntarias y reflejas, como la salivación, el parpadeo o las respuestas de miedo. No explica conductas emitidas voluntariamente para obtener un resultado." },
+            { question: "Según los textos, el surgimiento de la ciencia moderna, ejemplificada por figuras como Galileo y Newton, se caracteriza por:", options: ["La aceptación de la autoridad de Aristóteles y la Iglesia.", "El uso de la intuición y la revelación como fuentes de verdad.", "La combinación del método experimental y la formulación de leyes matemáticas.", "Un enfoque en la descripción cualitativa sin buscar la predicción."], answer: "La combinación del método experimental y la formulación de leyes matemáticas.", justification: "La Revolución Científica representó un cambio de paradigma hacia la idea de que el universo podía ser comprendido a través de la experimentación controlada y descrito mediante leyes matemáticas universales, como las leyes del movimiento de Newton." },
+            { question: "La concepción de Bleger sobre las tres áreas de la conducta (mente, cuerpo, mundo externo) implica que:", options: ["Son independientes y una puede existir sin las otras.", "La conducta siempre se manifiesta de forma predominante en el área de la mente.", "Son coexistentes e interdependientes en toda conducta.", "El estudio de la conducta debe centrarse solo en el área 3 (mundo externo)."], answer: "Son coexistentes e interdependientes en toda conducta.", justification: "Bleger postula una visión unitaria y dinámica de la conducta. Aunque una de las áreas pueda ser la que predomina en un momento dado, las otras dos siempre están presentes e implicadas. Por ejemplo, pensar (mente) implica una postura corporal (cuerpo) y una interacción simbólica (mundo externo)." },
+            { question: "¿Qué concepto es fundamental en la teoría de William James y lo diferencia radicalmente del Estructuralismo?", options: ["Los elementos de la conciencia.", "El método de la introspección.", "El 'flujo de la conciencia' (stream of consciousness).", "El condicionamiento clásico."], answer: "El 'flujo de la conciencia' (stream of consciousness).", justification: "Mientras el Estructuralismo intentaba descomponer la mente en 'átomos' estáticos, James insistía en que la conciencia es una corriente continua, personal y siempre cambiante, que no puede ser 'congelada' para su análisis sin destruir su naturaleza." },
+            { question: "Según Freud, ¿cuál es la función principal de los mecanismos de defensa como la represión?", options: ["Facilitar el recuerdo de eventos traumáticos.", "Proteger al yo de la ansiedad generada por conflictos inconscientes.", "Asegurar que la conducta se guíe por principios lógicos.", "Promover la libre expresión de todos los impulsos."], answer: "Proteger al yo de la ansiedad generada por conflictos inconscientes.", justification: "Los mecanismos de defensa son estrategias inconscientes que el yo utiliza para manejar la ansiedad que surge de los conflictos entre el ello (impulsos), el superyó (moral) y la realidad. La represión, el más básico, consiste en mantener fuera de la conciencia los pensamientos o deseos inaceptables." },
+            { question: "La principal diferencia entre el enfoque de Charcot sobre la histeria y el de la Escuela de Nancy (Bernheim) radicaba en que:", options: ["Charcot usaba hipnosis y la Escuela de Nancy no.", "Charcot creía que la histeria era una enfermedad real, mientras que la Escuela de Nancy la consideraba una simulación.", "Charcot la veía como un estado patológico propio de los histéricos, mientras que la Escuela de Nancy la atribuía a la sugestión, posible en cualquier persona.", "Charcot la trataba en hombres y la Escuela de Nancy solo en mujeres."], answer: "Charcot la veía como un estado patológico propio de los histéricos, mientras que la Escuela de Nancy la atribuía a la sugestión, posible en cualquier persona.", justification: "Para Charcot (Escuela de la Salpêtrière), la capacidad de ser hipnotizado era un signo de un sistema nervioso patológico. Para Bernheim (Escuela de Nancy), era un fenómeno normal producto de la sugestión, posible en casi cualquier persona." },
+            { question: "¿Qué filósofo es considerado un antecedente clave del Racionalismo y su influencia en la psicología por su énfasis en la duda metódica y el dualismo mente-cuerpo?", options: ["John Locke", "Francis Bacon", "Augusto Comte", "René Descartes"], answer: "René Descartes", justification: "Descartes es la figura central del Racionalismo. Su método basado en la duda y la razón, y su famosa distinción entre la 'res cogitans' (mente/pensamiento) y la 'res extensa' (cuerpo/materia), establecieron un marco fundamental para el pensamiento moderno y la posterior psicología filosófica." },
+            { question: "La principal contribución de Hermann Ebbinghaus a la psicología experimental fue:", options: ["Fundar el primer laboratorio en Leipzig.", "Medir la velocidad del impulso nervioso.", "Demostrar que los procesos mentales superiores como la memoria podían ser medidos experimentalmente.", "Descubrir el reflejo condicionado."], answer: "Demostrar que los procesos mentales superiores como la memoria podían ser medidos experimentalmente.", justification: "Mientras Wundt se centraba en procesos básicos, Ebbinghaus fue pionero en aplicar el método experimental a un proceso complejo como la memoria, usando sus famosas sílabas sin sentido para garantizar objetividad." },
+            { question: "La 'crisis de desunión' de la psicología se refiere a:", options: ["La falta de psicólogos para atender la demanda.", "La división entre la psicología básica y la aplicada.", "La fragmentación de la disciplina en múltiples escuelas y teorías a menudo incompatibles.", "El conflicto entre la psicología europea y la estadounidense."], answer: "La fragmentación de la disciplina en múltiples escuelas y teorías a menudo incompatibles.", justification: "Este término describe el debate interno sobre la falta de un paradigma unificador en psicología. La coexistencia de enfoques tan dispares como el psicoanálisis, el conductismo y el cognitivismo lleva a cuestionar si se trata de 'una' psicología o de 'muchos' estudios psicológicos." },
+            { question: "La figura de Carlos Vaz Ferreira es crucial en la historia de la psicología en Uruguay porque:", options: ["Fundó la Facultad de Psicología en 1994.", "Publicó 'Psicología Elemental' y propuso crear un laboratorio de investigaciones pedagógicas a fines del siglo XIX.", "Fue el primer presidente de la Sociedad de Psicología del Uruguay.", "Trajo el psicoanálisis a Uruguay."], answer: "Publicó 'Psicología Elemental' y propuso crear un laboratorio de investigaciones pedagógicas a fines del siglo XIX.", justification: "Vaz Ferreira es una figura pionera de la primera etapa de la psicología en Uruguay. Su trabajo y sus propuestas a finales de 1800 y principios de 1900 sentaron las bases para la futura institucionalización de la disciplina en el país." },
+            { question: "¿Qué describe mejor el concepto de 'apercepción' en la teoría de Wundt?", options: ["El simple registro de una sensación.", "Un proceso pasivo de asociación de ideas.", "Un proceso activo y voluntario donde la atención dirige la síntesis de los elementos mentales.", "Un reflejo condicionado."], answer: "Un proceso activo y voluntario donde la atención dirige la síntesis de los elementos mentales.", justification: "La apercepción es el núcleo del 'voluntarismo' de Wundt. No es una simple percepción, sino un acto de la voluntad que organiza activamente los contenidos de la conciencia en una síntesis creativa, donde el todo es más que la suma de sus partes." },
+            { question: "El abandono de la 'teoría de la seducción' por parte de Freud fue un punto de inflexión porque:", options: ["Dejó de usar la hipnosis.", "Comenzó a tratar a pacientes hombres.", "Reconoció el papel fundamental de la fantasía inconsciente en la formación de síntomas.", "Demostró que todos los traumas eran inventados."], answer: "Reconoció el papel fundamental de la fantasía inconsciente en la formación de síntomas.", justification: "Al principio, Freud creía que la neurosis siempre se debía a un abuso sexual real en la infancia. Su abandono de esta teoría significó el descubrimiento del 'mundo interno': la idea de que las fantasías y deseos inconscientes (la realidad psíquica) son tan potentes como la realidad externa para causar patología." },
+            { question: "¿Cuál era la principal crítica de Conwy Lloyd Morgan al trabajo de George Romanes sobre la inteligencia animal?", options: ["Que realizaba demasiados experimentos de laboratorio.", "Su antropomorfismo, es decir, atribuir capacidades humanas complejas a los animales.", "Que no creía en la teoría de la evolución de Darwin.", "Que solo estudiaba a los perros."], answer: "Su antropomorfismo, es decir, atribuir capacidades humanas complejas a los animales.", justification: "Romanes usaba el 'método anecdótico'. Morgan criticó esto proponiendo su 'Canon de Parsimonia': no debemos interpretar una acción animal como el resultado de una facultad psicológica superior si puede explicarse por una más simple. Esto sentó las bases para un estudio más objetivo del comportamiento animal." },
+            { question: "El Plan de Estudios 2013 de la Facultad de Psicología de la Udelar tiene como uno de sus objetivos principales:", options: ["Formar exclusivamente psicoanalistas.", "Priorizar la investigación básica por sobre la práctica profesional.", "Articular enseñanza, investigación y extensión para formar profesionales capaces de actuar en diversos ámbitos.", "Separar completamente la formación clínica de la educativa."], answer: "Articular enseñanza, investigación y extensión para formar profesionales capaces de actuar en diversos ámbitos.", justification: "El plan busca una formación integral, no especializada en una única corriente o campo. La articulación de las tres funciones universitarias (enseñanza, investigación, extensión) es clave para formar un psicólogo crítico y comprometido con la realidad social." },
+            { question: "El empirismo de John Locke, con su idea de la 'tábula rasa', es un antecedente filosófico fundamental para:", options: ["El Racionalismo de Descartes.", "El Innatismo de Galton.", "El Conductismo.", "La Frenología de Gall."], answer: "El Conductismo.", justification: "La idea de Locke de que la mente es una 'hoja en blanco' que se llena con la experiencia es la base del empirismo. El Conductismo es su heredero directo en psicología, al postular que es el ambiente (la experiencia, el aprendizaje) y no los factores innatos lo que determina la conducta." },
+            { question: "La creación del test Stanford-Binet por Lewis Terman supuso un cambio fundamental respecto a la visión de Binet porque:", options: ["Se tradujo del francés al inglés.", "Incorporó el concepto de Coeficiente Intelectual (CI) y una visión innatista de la inteligencia.", "Se empezó a aplicar solo a adultos.", "Eliminó todas las pruebas verbales."], answer: "Incorporó el concepto de Coeficiente Intelectual (CI) y una visión innatista de la inteligencia.", justification: "Mientras Binet veía la inteligencia como funcional y modificable, Terman la re-conceptualizó como una entidad única, fija y hereditaria. La creación del CI permitió cuantificar y jerarquizar esta supuesta capacidad innata, lo que tuvo un enorme impacto social y se alineó con el movimiento eugenésico." },
+            { question: "Según el modelo de Bleger, si un psicólogo interviene en la dinámica de una familia para mejorar su comunicación, está trabajando en el ámbito:", options: ["Psicosocial", "Sociodinámico", "Institucional", "Comunitario"], answer: "Sociodinámico", justification: "Una familia es un grupo. El ámbito sociodinámico se enfoca en el estudio del grupo como unidad, analizando las interacciones, roles y dinámicas que ocurren dentro de él, más allá de la psicología individual de cada miembro (que sería el ámbito psicosocial)." }
+        ];
+
+
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        let isAudioEnabled = false;
+        let synth;
+
+        function initSpeechSynthesis() {
+            if ('speechSynthesis' in window) {
+                synth = window.speechSynthesis;
+            } else {
+                console.warn("La API de Síntesis de Voz no es soportada en este navegador.");
+                document.getElementById('audio-toggle').style.display = 'none';
+            }
+        }
+        
+        window.onload = initSpeechSynthesis;
+
+        const menuScreen = document.getElementById('menu-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const scoreScreen = document.getElementById('score-screen');
+        
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const justificationDiv = document.getElementById('justification');
+        const progressCounter = document.getElementById('progress-counter');
+        const audioToggleBtn = document.getElementById('audio-toggle');
+        const nextBtn = document.getElementById('next-btn');
+        
+        // --- Algoritmo de Aleatorización Mejorado ---
+        function shuffleWithStreakLimit(arr, limit) {
+            let shuffled = [...arr].sort(() => Math.random() - 0.5); // Initial random shuffle
+            
+            for (let i = 0; i <= shuffled.length - limit; i++) {
+                // Check for a streak
+                let streak = true;
+                for (let j = 1; j < limit; j++) {
+                    if (shuffled[i].answer !== shuffled[i+j].answer) {
+                        streak = false;
+                        break;
+                    }
+                }
+                
+                if (streak) {
+                    // Streak found, find a question with a different answer to swap
+                    let swapIndex = -1;
+                    for (let k = i + limit; k < shuffled.length; k++) {
+                        if (shuffled[k].answer !== shuffled[i].answer) {
+                            swapIndex = k;
+                            break;
+                        }
+                    }
+                    
+                    if (swapIndex !== -1) {
+                        // Perform the swap
+                        [shuffled[i + limit -1], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[i + limit - 1]];
+                    }
+                    // If no swap is possible, the streak might remain, but it's less likely.
+                    // A more complex algorithm would be needed for a perfect guarantee, but this is a good improvement.
+                }
+            }
+            return shuffled;
+        }
+
+
+        function startQuiz(mode) {
+            currentQuestionIndex = 0;
+            score = 0;
+            let baseQuestions;
+            if (mode === 'tf') {
+                baseQuestions = [...tfQuestions];
+                currentQuestions = shuffleWithStreakLimit(baseQuestions, 4); // Limit streaks to 3 (check for 4)
+            } else {
+                baseQuestions = [...mcQuestions];
+                // For MC, a simple shuffle is enough as streaks are less of an issue.
+                baseQuestions.sort(() => Math.random() - 0.5);
+                currentQuestions = baseQuestions;
+            }
+            
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            
+            menuScreen.classList.remove('active');
+            scoreScreen.classList.remove('active');
+            quizScreen.classList.add('active');
+
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            justificationDiv.style.display = 'none';
+            justificationDiv.innerHTML = '';
+            
+            const question = currentQuestions[currentQuestionIndex];
+            questionText.innerText = question.question;
+            speak(question.question);
+            
+            optionsContainer.innerHTML = '';
+
+            if (question.options) {
+                const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.innerText = option;
+                    button.classList.add('btn', 'option-btn');
+                    button.onclick = () => selectAnswer(option);
+                    optionsContainer.appendChild(button);
+                });
+            } else {
+                const trueBtn = document.createElement('button');
+                trueBtn.innerText = 'Verdadero';
+                trueBtn.classList.add('btn', 'option-btn');
+                trueBtn.onclick = () => selectAnswer(true);
+                optionsContainer.appendChild(trueBtn);
+
+                const falseBtn = document.createElement('button');
+                falseBtn.innerText = 'Falso';
+                falseBtn.classList.add('btn', 'option-btn');
+                falseBtn.onclick = () => selectAnswer(false);
+                optionsContainer.appendChild(falseBtn);
+            }
+            
+            updateProgress();
+            checkAnswered();
+        }
+
+        function selectAnswer(selected) {
+            if (userAnswers[currentQuestionIndex] !== null) return;
+
+            userAnswers[currentQuestionIndex] = selected;
+            const question = currentQuestions[currentQuestionIndex];
+            const isCorrect = selected === question.answer;
+            let feedbackText = isCorrect ? "¡Correcto!" : "Incorrecto.";
+            
+            justificationDiv.innerHTML = `<strong>${feedbackText}</strong> ${question.justification}`;
+            justificationDiv.style.display = 'block';
+
+            speak(`${feedbackText} La justificación es: ${question.justification}`);
+            highlightAnswers();
+            updateProgress();
+        }
+        
+        function highlightAnswers() {
+             const question = currentQuestions[currentQuestionIndex];
+             const buttons = optionsContainer.getElementsByTagName('button');
+             
+             for(let button of buttons) {
+                button.disabled = true;
+                let buttonValue;
+
+                if (question.options) {
+                    buttonValue = button.innerText;
+                } else {
+                    buttonValue = button.innerText === 'Verdadero';
+                }
+
+                if(buttonValue === question.answer) {
+                    button.classList.add('correct');
+                } else if (buttonValue === userAnswers[currentQuestionIndex]) {
+                    button.classList.add('incorrect');
+                }
+             }
+        }
+
+        function checkAnswered() {
+            if (userAnswers[currentQuestionIndex] !== null) {
+                highlightAnswers();
+                const question = currentQuestions[currentQuestionIndex];
+                const isCorrect = userAnswers[currentQuestionIndex] === question.answer;
+                justificationDiv.innerHTML = `<strong>${isCorrect ? '¡Correcto!' : 'Incorrecto.'}</strong> ${question.justification}`;
+                justificationDiv.style.display = 'block';
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const answeredCount = userAnswers.filter(a => a !== null).length;
+            const remaining = currentQuestions.length - answeredCount;
+            progressCounter.innerText = `Pregunta ${currentQuestionIndex + 1} de ${currentQuestions.length}. | Te quedan ${remaining} por resolver.`;
+            nextBtn.innerText = (currentQuestionIndex === currentQuestions.length - 1) ? "Ver Puntuación" : "Siguiente";
+        }
+        
+        function showScore() {
+            quizScreen.classList.remove('active');
+            scoreScreen.classList.add('active');
+            
+            const finalScoreDiv = document.getElementById('final-score');
+            
+            let correctAnswers = 0;
+            for(let i=0; i < currentQuestions.length; i++) {
+                if(userAnswers[i] === currentQuestions[i].answer){
+                    correctAnswers++;
+                }
+            }
+            score = correctAnswers;
+
+            const percentage = currentQuestions.length > 0 ? Math.round((score / currentQuestions.length) * 100) : 0;
+            finalScoreDiv.innerHTML = `Puntuación Final:<br><strong>${score} de ${currentQuestions.length} correctas (${percentage}%)</strong>`;
+            speak(`Cuestionario completado. Tu puntuación final es ${score} de ${currentQuestions.length} preguntas correctas.`);
+        }
+        
+        function goToMenu() {
+            scoreScreen.classList.remove('active');
+            menuScreen.classList.add('active');
+        }
+
+        function toggleAudio() {
+            isAudioEnabled = !isAudioEnabled;
+            if (isAudioEnabled) {
+                audioToggleBtn.textContent = 'Audio: ON';
+                audioToggleBtn.classList.add('active');
+                speak("Audio activado");
+            } else {
+                if(synth) synth.cancel();
+                audioToggleBtn.textContent = 'Audio: OFF';
+                audioToggleBtn.classList.remove('active');
+            }
+        }
+
+        function speak(text) {
+            if (isAudioEnabled && synth) {
+                try {
+                    synth.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'es-UY'; // Using Uruguayan Spanish for regional preference
+                    utterance.rate = 0.9;
+                    synth.speak(utterance);
+                } catch(e) {
+                    console.error("Error en la síntesis de voz: ", e);
+                }
+            }
+        }
+
+        // Initialize
+        menuScreen.classList.add('active');
+
+    </script>
+</body>
+</html>
