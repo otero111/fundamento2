@@ -8,9 +8,9 @@
         :root {
             --background-color: #0d1117;
             --surface-color: #161b22;
-            --primary-color: #58a6ff;
-            --primary-variant-color: #1f6feb;
-            --secondary-color: #30c8d6;
+            --primary-color: #58a6ff; /* Azul principal */
+            --primary-variant-color: #1f6feb; /* Azul más oscuro para hover */
+            --secondary-color: #30c8d6; /* Celeste/cian para acentos */
             --text-color: #c9d1d9;
             --correct-color: #2ea043;
             --incorrect-color: #da3633;
@@ -178,6 +178,7 @@
 <body>
 
     <div class="container">
+        <!-- Pantalla de Menú Inicial -->
         <div id="menu-screen" class="active">
             <h1>Guía de Estudio Definitiva</h1>
             <h2>Fundamentos de la Psicología</h2>
@@ -186,6 +187,7 @@
             <button class="btn" onclick="startQuiz('mc')">Múltiple Opción (55 Preguntas)</button>
         </div>
 
+        <!-- Pantalla del Cuestionario -->
         <div id="quiz-screen">
             <div class="quiz-header">
                 <div id="prev-question" class="nav-arrow" onclick="previousQuestion()">&#x2190;</div>
@@ -205,6 +207,7 @@
             </div>
         </div>
         
+        <!-- Pantalla de Puntuación Final -->
         <div id="score-screen">
             <h2>¡Cuestionario Completado!</h2>
             <div id="total-time-display"></div>
@@ -290,7 +293,7 @@
 
         const mcQuestions = [
             { question: "¿Qué palabra describe mejor el panorama de aproximaciones (escuelas, paradigmas, objetos de estudio y métodos) que presenta la psicología en el ámbito académico y científico?", options: ["Unificación", "Consenso", "Diversidad", "Estabilidad"], answer: "Diversidad", justification: "Como se discute en el texto de Arana, la psicología se caracteriza por una marcada diversidad de enfoques, métodos y objetos de estudio, lo que genera una constante tensión y debate interno sobre su identidad como ciencia." },
-            { question: "Para que la psicología aplicada sea considerada científica, ¿en qué debe basarse?", options: ["En la intuición", "En técnicas no probadas", "En los conocimientos que la psicología básica haya probado que son científicos", "En la experiencia propia del profesional"], answer: "En los conocimientos que la psicología básica haya probado que son científicos", justification: "La psicología aplicada deriva su legitimidad y eficacia de la investigación básica. Sus intervenciones deben estar fundamentadas en principios y conocimientos que han sido validados a través del método científico." },
+            { question: "Para que la psicología aplicada sea considerada científica, ¿en qué debe basarse?", options: ["En la intuición y el sentido común", "En técnicas populares no probadas", "En los conocimientos que la psicología básica haya probado que son científicos", "En la experiencia personal del profesional"], answer: "En los conocimientos que la psicología básica haya probado que son científicos", justification: "La psicología aplicada deriva su legitimidad y eficacia de la investigación básica. Sus intervenciones deben estar fundamentadas en principios y conocimientos que han sido validados a través del método científico." },
             { question: "¿Cuál de las siguientes opciones describe mejor el objetivo principal de Wilhelm Wundt al fundar el primer laboratorio de psicología?", options: ["Medir las diferencias individuales en inteligencia.", "Analizar la estructura de la experiencia consciente en sus elementos básicos.", "Entender las funciones adaptativas de la conducta.", "Tratar los trastornos mentales a través de la hipnosis."], answer: "Analizar la estructura de la experiencia consciente en sus elementos básicos.", justification: "Wundt, padre de la psicología experimental, buscaba descomponer la conciencia en sus componentes elementales (sensaciones, sentimientos) a través de la introspección experimental. Su objetivo era estructural, no funcional, ni de medición de la inteligencia ni clínico." },
             { question: "El 'manifiesto conductista' de John B. Watson en 1913 propuso que la psicología debería abandonar el estudio de la conciencia y enfocarse en:", options: ["Los procesos inconscientes.", "La percepción y la memoria.", "La conducta observable.", "Los arquetipos culturales."], answer: "La conducta observable.", justification: "La revolución conductista de Watson consistió precisamente en redefinir la psicología como una ciencia natural, cuyo único objeto de estudio legítimo era la conducta observable, medible y cuantificable, rechazando por completo la introspección y el estudio de la 'mente'." },
             { question: "¿Qué concepto es fundamental en la teoría de William James y lo diferencia radicalmente del Estructuralismo?", options: ["Los elementos de la conciencia.", "El método de la introspección.", "El 'flujo de la conciencia' (stream of consciousness).", "El condicionamiento clásico."], answer: "El 'flujo de la conciencia' (stream of consciousness).", justification: "Mientras el Estructuralismo intentaba descomponer la mente en 'átomos' estáticos, James insistía en que la conciencia es una corriente continua, personal y siempre cambiante, que no puede ser 'congelada' para su análisis sin destruir su naturaleza." },
@@ -319,7 +322,17 @@
             { question: "Respecto al dualismo mente-cuerpo, es correcto afirmar que:", options: ["Fue resuelto definitivamente por la psicología experimental.", "Es un problema que la psicología actual ya no considera relevante.", "Se refiere a la concepción de la existencia de dos sustancias opuestas: la material y la espiritual.", "Surgió por primera vez con el Conductismo."], answer: "Se refiere a la concepción de la existencia de dos sustancias opuestas: la material y la espiritual.", justification: "Este es el núcleo del problema filosófico heredado por la psicología, especialmente a partir de Descartes. La tensión entre lo mental (privado, subjetivo) y lo físico (público, observable) ha marcado la historia de la disciplina, generando diversas escuelas y enfoques." },
             { question: "Las tres áreas de manifestación de la conducta según Bleger son:", options: ["Inconsciente, Preconsciente y Consciente.", "Mente, Cuerpo y Mundo exterior.", "Individuo, Grupo e Institución.", "Estímulo, Respuesta y Consecuencia."], answer: "Mente, Cuerpo y Mundo exterior.", justification: "Bleger postula que toda conducta es una unidad que se manifiesta simultáneamente en estas tres áreas: el área 1 (mente, procesos simbólicos), el área 2 (cuerpo, manifestaciones fisiológicas) y el área 3 (mundo exterior, acciones concretas)." },
             { question: "La psicología humanista se considera la 'tercera fuerza' porque surge como una reacción crítica a:", options: ["El Estructuralismo y el Funcionalismo.", "La Psicología de la Gestalt y la Psicofísica.", "El Psicoanálisis y el Conductismo.", "El Positivismo y el Empirismo."], answer: "El Psicoanálisis y el Conductismo.", justification: "El humanismo se presentó como una alternativa a las dos grandes escuelas dominantes de la primera mitad del siglo XX. Criticaba al psicoanálisis por su determinismo y su visión pesimista del hombre, y al conductismo por su mecanicismo y por ignorar la conciencia y la experiencia subjetiva." },
-            { question: "¿Cuál de las siguientes expresiones pertenece a José Bleger?", options: ["El todo es más que la suma de sus partes.", "La conducta es una respuesta a un estímulo.", "El estudio de la conducta se hace en función de la personalidad y del inseparable contexto social.", "Conócete a ti mismo."], answer: "El estudio de la conducta se hace en función de la personalidad y del inseparable contexto social.", justification: "Esta frase resume la perspectiva de Bleger, quien se opone a una visión reduccionista de la conducta. Para él, la conducta solo puede ser entendida en su contexto, como una manifestación de la personalidad total en una situación dada." }
+            { question: "¿Cuál de las siguientes expresiones pertenece a José Bleger?", options: ["El todo es más que la suma de sus partes.", "La conducta es una respuesta a un estímulo.", "El estudio de la conducta se hace en función de la personalidad y del inseparable contexto social.", "Conócete a ti mismo."], answer: "El estudio de la conducta se hace en función de la personalidad y del inseparable contexto social.", justification: "Esta frase resume la perspectiva de Bleger, quien se opone a una visión reduccionista de la conducta. Para él, la conducta solo puede ser entendida en su contexto, como una manifestación de la personalidad total en una situación dada." },
+            { question: "La principal contribución de Hermann Ebbinghaus a la psicología experimental fue:", options: ["Fundar el primer laboratorio en Leipzig.", "Medir la velocidad del impulso nervioso.", "Demostrar que los procesos mentales superiores como la memoria podían ser medidos experimentalmente.", "Descubrir el reflejo condicionado."], answer: "Demostrar que los procesos mentales superiores como la memoria podían ser medidos experimentalmente.", justification: "Mientras Wundt se centraba en procesos básicos, Ebbinghaus fue pionero en aplicar el método experimental a un proceso complejo como la memoria, usando sus famosas sílabas sin sentido para garantizar objetividad." },
+            { question: "La 'crisis de desunión' de la psicología se refiere a:", options: ["La falta de psicólogos para atender la demanda.", "La división entre la psicología básica y la aplicada.", "La fragmentación de la disciplina en múltiples escuelas y teorías a menudo incompatibles.", "El conflicto entre la psicología europea y la estadounidense."], answer: "La fragmentación de la disciplina en múltiples escuelas y teorías a menudo incompatibles.", justification: "Este término describe el debate interno sobre la falta de un paradigma unificador en psicología. La coexistencia de enfoques tan dispares como el psicoanálisis, el conductismo y el cognitivismo lleva a cuestionar si se trata de 'una' psicología o de 'muchos' estudios psicológicos." },
+            { question: "La figura de Carlos Vaz Ferreira es crucial en la historia de la psicología en Uruguay porque:", options: ["Fundó la Facultad de Psicología en 1994.", "Publicó 'Psicología Elemental' y propuso crear un laboratorio de investigaciones pedagógicas a fines del siglo XIX.", "Fue el primer presidente de la Sociedad de Psicología del Uruguay.", "Trajo el psicoanálisis a Uruguay."], answer: "Publicó 'Psicología Elemental' y propuso crear un laboratorio de investigaciones pedagógicas a fines del siglo XIX.", justification: "Vaz Ferreira es una figura pionera de la primera etapa de la psicología en Uruguay. Su trabajo y sus propuestas a finales de 1800 y principios de 1900 sentaron las bases para la futura institucionalización de la disciplina en el país." },
+            { question: "¿Qué describe mejor el concepto de 'apercepción' en la teoría de Wundt?", options: ["El simple registro de una sensación.", "Un proceso pasivo de asociación de ideas.", "Un proceso activo y voluntario donde la atención dirige la síntesis de los elementos mentales.", "Un reflejo condicionado."], answer: "Un proceso activo y voluntario donde la atención dirige la síntesis de los elementos mentales.", justification: "La apercepción es el núcleo del 'voluntarismo' de Wundt. No es una simple percepción, sino un acto de la voluntad que organiza activamente los contenidos de la conciencia en una síntesis creativa, donde el todo es más que la suma de sus partes." },
+            { question: "El abandono de la 'teoría de la seducción' por parte de Freud fue un punto de inflexión porque:", options: ["Dejó de usar la hipnosis.", "Comenzó a tratar a pacientes hombres.", "Reconoció el papel fundamental de la fantasía inconsciente en la formación de síntomas.", "Demostró que todos los traumas eran inventados."], answer: "Reconoció el papel fundamental de la fantasía inconsciente en la formación de síntomas.", justification: "Al principio, Freud creía que la neurosis siempre se debía a un abuso sexual real en la infancia. Su abandono de esta teoría significó el descubrimiento del 'mundo interno': la idea de que las fantasías y deseos inconscientes (la realidad psíquica) son tan potentes como la realidad externa para causar patología." },
+            { question: "¿Cuál era la principal crítica de Conwy Lloyd Morgan al trabajo de George Romanes sobre la inteligencia animal?", options: ["Que realizaba demasiados experimentos de laboratorio.", "Su antropomorfismo, es decir, atribuir capacidades humanas complejas a los animales.", "Que no creía en la teoría de la evolución de Darwin.", "Que solo estudiaba a los perros."], answer: "Su antropomorfismo, es decir, atribuir capacidades humanas complejas a los animales.", justification: "Romanes usaba el 'método anecdótico'. Morgan criticó esto proponiendo su 'Canon de Parsimonia': no debemos interpretar una acción animal como el resultado de una facultad psicológica superior si puede explicarse por una más simple. Esto sentó las bases para un estudio más objetivo del comportamiento animal." },
+            { question: "El Plan de Estudios 2013 de la Facultad de Psicología de la Udelar tiene como uno de sus objetivos principales:", options: ["Formar exclusivamente psicoanalistas.", "Priorizar la investigación básica por sobre la práctica profesional.", "Articular enseñanza, investigación y extensión para formar profesionales capaces de actuar en diversos ámbitos.", "Separar completamente la formación clínica de la educativa."], answer: "Articular enseñanza, investigación y extensión para formar profesionales capaces de actuar en diversos ámbitos.", justification: "El plan busca una formación integral, no especializada en una única corriente o campo. La articulación de las tres funciones universitarias (enseñanza, investigación, extensión) es clave para formar un psicólogo crítico y comprometido con la realidad social." },
+            { question: "El empirismo de John Locke, con su idea de la 'tábula rasa', es un antecedente filosófico fundamental para:", options: ["El Racionalismo de Descartes.", "El Innatismo de Galton.", "El Conductismo.", "La Frenología de Gall."], answer: "El Conductismo.", justification: "La idea de Locke de que la mente es una 'hoja en blanco' que se llena con la experiencia es la base del empirismo. El Conductismo es su heredero directo en psicología, al postular que es el ambiente (la experiencia, el aprendizaje) y no los factores innatos lo que determina la conducta." },
+            { question: "La creación del test Stanford-Binet por Lewis Terman supuso un cambio fundamental respecto a la visión de Binet porque:", options: ["Se tradujo del francés al inglés.", "Incorporó el concepto de Coeficiente Intelectual (CI) y una visión innatista de la inteligencia.", "Se empezó a aplicar solo a adultos.", "Eliminó todas las pruebas verbales."], answer: "Incorporó el concepto de Coeficiente Intelectual (CI) y una visión innatista de la inteligencia.", justification: "Mientras Binet veía la inteligencia como funcional y modificable, Terman la re-conceptualizó como una entidad única, fija y hereditaria. La creación del CI permitió cuantificar y jerarquizar esta supuesta capacidad innata, lo que tuvo un enorme impacto social y se alineó con el movimiento eugenésico." },
+            { question: "Según el modelo de Bleger, si un psicólogo interviene en la dinámica de una familia para mejorar su comunicación, está trabajando en el ámbito:", options: ["Psicosocial", "Sociodinámico", "Institucional", "Comunitario"], answer: "Sociodinámico", justification: "Una familia es un grupo. El ámbito sociodinámico se enfoca en el estudio del grupo como unidad, analizando las interacciones, roles y dinámicas que ocurren dentro de él, más allá de la psicología individual de cada miembro (que sería el ámbito psicosocial)." }
         ];
 
         let currentQuestions = [];
@@ -390,10 +403,10 @@
             score = 0;
             let baseQuestions;
             if (mode === 'tf') {
-                baseQuestions = [...tfQuestions];
+                baseQuestions = tfQuestions;
                 currentQuestions = shuffleWithStreakLimit(baseQuestions, 4); 
             } else {
-                baseQuestions = [...mcQuestions];
+                baseQuestions = mcQuestions;
                 baseQuestions.sort(() => Math.random() - 0.5);
                 currentQuestions = baseQuestions;
             }
@@ -566,7 +579,7 @@
                 passFailResult.className = 'fail';
             }
 
-            speak(`Cuestionario completado. Tu puntuación final es ${score} de ${currentQuestions.length} correctas. ${passFailResult.textContent}`);
+            speak(`Cuestionario completado. Tu puntuación final es ${score} de ${currentQuestions.length} preguntas correctas. ${passFailResult.textContent}`);
         }
         
         function goToMenu() {
