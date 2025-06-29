@@ -8,12 +8,13 @@
         :root {
             --background-color: #0d1117;
             --surface-color: #161b22;
-            --primary-color: #58a6ff; /* Azul principal */
-            --primary-variant-color: #1f6feb; /* Azul más oscuro para hover */
-            --secondary-color: #30c8d6; /* Celeste/cian para acentos */
+            --primary-color: #58a6ff;
+            --primary-variant-color: #1f6feb;
+            --secondary-color: #30c8d6;
             --text-color: #c9d1d9;
             --correct-color: #2ea043;
             --incorrect-color: #da3633;
+            --warning-color: #f0b90c;
             --button-text-color: #0d1117;
         }
 
@@ -33,7 +34,7 @@
 
         .container {
             background-color: var(--surface-color);
-            padding: 30px;
+            padding: 30px 40px;
             border: 1px solid #30363d;
             border-radius: 15px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -61,6 +62,55 @@
             color: var(--text-color);
             font-size: 1.3em;
             line-height: 1.5;
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            right: 25px;
+        }
+
+        .nav-arrow {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: color 0.3s ease;
+            user-select: none;
+        }
+        .nav-arrow:hover {
+            color: var(--secondary-color);
+        }
+        
+        #audio-toggle {
+            background-color: #f0f0f0;
+            color: #121212;
+            border: 1px solid #8b949e;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        #audio-toggle.active {
+            background-color: var(--secondary-color);
+            color: var(--button-text-color);
+            border-color: var(--secondary-color);
+        }
+
+        #timer-display {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        #question-area {
+            margin-top: 60px; /* Space for the header */
         }
 
         .btn {
@@ -101,128 +151,53 @@
             color: #fff;
         }
 
-        .option-btn.correct {
-            background-color: var(--correct-color);
-            border-color: var(--correct-color);
-            color: #fff;
-        }
-
-        .option-btn.incorrect {
-            background-color: var(--incorrect-color);
-            border-color: var(--incorrect-color);
-            color: #fff;
-        }
-
-        .option-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.8;
-        }
+        .option-btn.correct { background-color: var(--correct-color); border-color: var(--correct-color); color: #fff; }
+        .option-btn.incorrect { background-color: var(--incorrect-color); border-color: var(--incorrect-color); color: #fff; }
+        .option-btn:disabled { cursor: not-allowed; opacity: 0.8; }
 
         #justification {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: var(--background-color);
-            border: 1px solid #30363d;
-            text-align: left;
-            line-height: 1.6;
-            display: none;
+            margin-top: 20px; padding: 15px; border-radius: 8px; background-color: var(--background-color);
+            border: 1px solid #30363d; text-align: left; line-height: 1.6; display: none;
         }
         
-        #justification strong {
-            color: var(--secondary-color);
-            display: block;
-            margin-bottom: 5px;
-        }
+        #justification strong { color: var(--secondary-color); display: block; margin-bottom: 5px; }
 
-        #navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 25px;
-        }
-
-        #progress-counter {
-            font-size: 0.9em;
-            color: #8b949e;
-        }
-
-        .nav-arrow {
-            font-size: 2.5em;
-            color: var(--primary-color);
-            cursor: pointer;
-            position: absolute;
-            top: 20px;
-            left: 25px;
-            transition: color 0.3s ease;
-            user-select: none;
-        }
-        .nav-arrow:hover {
-            color: var(--secondary-color);
-        }
+        #navigation { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; }
+        #progress-counter { font-size: 0.9em; color: #8b949e; }
         
-        #audio-toggle {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            background-color: #f0f0f0;
-            color: #121212;
-            border: 1px solid #8b949e;
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 0.8em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        
-        #audio-toggle:hover {
-            background-color: #c9d1d9;
-        }
+        #final-score { font-size: 1.5em; margin: 20px 0; }
+        #final-score strong { color: var(--primary-color); }
+        #total-time-display { font-size: 1.1em; color: #8b949e; margin-bottom: 15px; }
+        #pass-fail-result { font-size: 1.6em; font-weight: bold; margin-bottom: 20px; }
+        .pass { color: var(--correct-color); }
+        .fail { color: var(--warning-color); }
 
-        #audio-toggle.active {
-            background-color: var(--secondary-color);
-            color: var(--button-text-color);
-            border-color: var(--secondary-color);
-        }
-        
-        #final-score {
-            font-size: 1.5em;
-            margin: 20px 0;
-        }
-        
-        #final-score strong {
-            color: var(--primary-color);
-        }
-
-        footer {
-            margin-top: 30px;
-            font-size: 0.8em;
-            color: #8b949e;
-        }
-
+        footer { margin-top: 30px; font-size: 0.8em; color: #8b949e; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Pantalla de Menú Inicial -->
         <div id="menu-screen" class="active">
             <h1>Guía de Estudio Definitiva</h1>
             <h2>Fundamentos de la Psicología</h2>
             <p>Contenido actualizado y verificado con los materiales del curso y parciales anteriores. ¡Éxito en tu examen!</p>
-            <button class="btn" onclick="startQuiz('tf')">Verdadero o Falso (60 Preguntas)</button>
-            <button class="btn" onclick="startQuiz('mc')">Múltiple Opción (40 Preguntas)</button>
+            <button class="btn" onclick="startQuiz('tf')">Verdadero o Falso (65 Preguntas)</button>
+            <button class="btn" onclick="startQuiz('mc')">Múltiple Opción (55 Preguntas)</button>
         </div>
 
-        <!-- Pantalla del Cuestionario -->
         <div id="quiz-screen">
-            <div id="prev-question" class="nav-arrow" onclick="previousQuestion()">&#x2190;</div>
-            <button id="audio-toggle" onclick="toggleAudio()">Audio: OFF</button>
+            <div class="quiz-header">
+                <div id="prev-question" class="nav-arrow" onclick="previousQuestion()">&#x2190;</div>
+                <div id="timer-display">Tiempo: 00:00</div>
+                <button id="audio-toggle" onclick="toggleAudio()">Audio: OFF</button>
+            </div>
             
-            <h2 id="question-text"></h2>
-            <div id="options-container"></div>
-            <div id="justification"></div>
+            <div id="question-area">
+                <h2 id="question-text"></h2>
+                <div id="options-container"></div>
+                <div id="justification"></div>
+            </div>
 
             <div id="navigation">
                 <div id="progress-counter"></div>
@@ -230,11 +205,12 @@
             </div>
         </div>
         
-        <!-- Pantalla de Puntuación Final -->
         <div id="score-screen">
             <h2>¡Cuestionario Completado!</h2>
+            <div id="total-time-display"></div>
             <div id="final-score"></div>
-            <p>Puedes volver al menú para intentarlo de nuevo o probar la otra modalidad.</p>
+            <div id="pass-fail-result"></div>
+            <p>Puedes volver al menú principal para intentarlo de nuevo o probar la otra modalidad.</p>
             <button class="btn" onclick="goToMenu()">Volver al Menú</button>
         </div>
     </div>
@@ -277,7 +253,7 @@
             { question: "Freud abandonó la hipnosis porque descubrió que no todos los pacientes eran hipnotizables y las curas a menudo no eran duraderas.", answer: true, justification: "Verdadero. Además, se dio cuenta de que bajo hipnosis el paciente no participaba conscientemente en su curación, lo que lo llevó a desarrollar el método de la asociación libre." },
             { question: "La 'teoría de la seducción' de Freud sostiene que la causa de la neurosis es siempre una fantasía infantil, nunca un evento real.", answer: false, justification: "Falso. La teoría de la seducción fue su primera hipótesis, que sostenía que la causa era un abuso sexual real. Freud la abandonó al descubrir el poder de la fantasía inconsciente, pero no negó que los abusos reales pudieran ocurrir." },
             
-            // Contenido de Clases 12 y 13: Psicología en Latam/Uruguay y Ámbitos
+            // Clases 12 y 13
             { question: "La psicología en Latinoamérica, en sus inicios, se caracterizó por desarrollar teorías y métodos completamente originales y desvinculados de Europa o EE. UU.", answer: false, justification: "Falso. Una característica central de la psicología latinoamericana inicial fue su carácter receptivo y dependiente de los modelos extranjeros." },
             { question: "La 'crisis de desunión' en psicología se refiere a la falta de psicólogos para cubrir la demanda de la población.", answer: false, justification: "Falso. Se refiere al debate interno de la disciplina sobre su falta de una teoría y un método unificados, es decir, a su fragmentación en múltiples escuelas y enfoques." },
             { question: "Según Bleger, el instrumento principal con el que trabaja el psicólogo es su propia personalidad.", answer: true, justification: "Verdadero. Bleger enfatiza que el psicólogo trabaja 'con' y 'a través' de sí mismo, siendo su personalidad y su capacidad de establecer vínculos sus herramientas fundamentales." },
@@ -313,7 +289,6 @@
         ];
 
         const mcQuestions = [
-            // Preguntas Múltiple Opción validadas y/o adaptadas de los parciales
             { question: "¿Qué palabra describe mejor el panorama de aproximaciones (escuelas, paradigmas, objetos de estudio y métodos) que presenta la psicología en el ámbito académico y científico?", options: ["Unificación", "Consenso", "Diversidad", "Estabilidad"], answer: "Diversidad", justification: "Como se discute en el texto de Arana, la psicología se caracteriza por una marcada diversidad de enfoques, métodos y objetos de estudio, lo que genera una constante tensión y debate interno sobre su identidad como ciencia." },
             { question: "Para que la psicología aplicada sea considerada científica, ¿en qué debe basarse?", options: ["En la intuición", "En técnicas no probadas", "En los conocimientos que la psicología básica haya probado que son científicos", "En la experiencia propia del profesional"], answer: "En los conocimientos que la psicología básica haya probado que son científicos", justification: "La psicología aplicada deriva su legitimidad y eficacia de la investigación básica. Sus intervenciones deben estar fundamentadas en principios y conocimientos que han sido validados a través del método científico." },
             { question: "¿Cuál de las siguientes opciones describe mejor el objetivo principal de Wilhelm Wundt al fundar el primer laboratorio de psicología?", options: ["Medir las diferencias individuales en inteligencia.", "Analizar la estructura de la experiencia consciente en sus elementos básicos.", "Entender las funciones adaptativas de la conducta.", "Tratar los trastornos mentales a través de la hipnosis."], answer: "Analizar la estructura de la experiencia consciente en sus elementos básicos.", justification: "Wundt, padre de la psicología experimental, buscaba descomponer la conciencia en sus componentes elementales (sensaciones, sentimientos) a través de la introspección experimental. Su objetivo era estructural, no funcional, ni de medición de la inteligencia ni clínico." },
@@ -333,7 +308,18 @@
             { question: "¿Cuál de las siguientes leyes de la percepción pertenece a la escuela de la Gestalt?", options: ["Ley del Efecto.", "Ley de la Parsimonia.", "Ley de Cierre.", "Ley de la Recapitulación."], answer: "Ley de Cierre.", justification: "La Ley de Cierre, que describe nuestra tendencia a percibir figuras incompletas como si estuvieran completas, es uno de los principios clásicos de la organización perceptual descritos por la psicología de la Gestalt, junto con las leyes de proximidad, similitud, continuidad, etc." },
             { question: "El funcionalismo, influido por Darwin, considera la vida mental y el comportamiento en términos de:", options: ["Adaptación activa al ambiente.", "Estructuras fijas e innatas.", "Conflictos inconscientes.", "Estímulos y respuestas."], answer: "Adaptación activa al ambiente.", justification: "La pregunta central del funcionalismo es cómo los procesos mentales ayudan al organismo a sobrevivir y adaptarse a su entorno. Es una psicología dinámica, centrada en la utilidad y el propósito de la mente." },
             { question: "La 'duda metódica' como punto de partida del método científico para alcanzar la verdad fue propuesta por:", options: ["Platón", "Aristóteles", "Francis Bacon", "René Descartes"], answer: "René Descartes", justification: "Descartes propuso dudar de todo aquello que no fuera absolutamente evidente, para así encontrar una primera verdad indubitable ('Pienso, luego existo') sobre la cual reconstruir todo el edificio del conocimiento de manera racional y segura." },
-            { question: "Bleger, al referirse al rol del psicólogo, afirma que su principal instrumento de trabajo es:", options: ["La aplicación de tests psicométricos.", "El método experimental.", "Su propia personalidad.", "Su conocimiento teórico."], answer: "Su propia personalidad.", justification: "Para Bleger, la tarea del psicólogo es inseparable de su persona. El contacto directo con el objeto de estudio y la capacidad de usar su propia subjetividad de manera controlada (disociación instrumental) son condiciones impostergables de su oficio." }
+            { question: "Bleger, al referirse al rol del psicólogo, afirma que su principal instrumento de trabajo es:", options: ["La aplicación de tests psicométricos.", "El método experimental.", "Su propia personalidad.", "Su conocimiento teórico."], answer: "Su propia personalidad.", justification: "Para Bleger, la tarea del psicólogo es inseparable de su persona. El contacto directo con el objeto de estudio y la capacidad de usar su propia subjetividad de manera controlada (disociación instrumental) son condiciones impostergables de su oficio." },
+            { question: "En el campo de la salud mental, el enfoque actual concibe la salud como:", options: ["La ausencia de enfermedades psicofísicas.", "Un concepto integral que incluye determinantes sociales, económicos y la promoción de la salud.", "Un estado puramente biológico atendido por equipos médicos.", "Un aspecto exclusivamente psicológico del sujeto."], answer: "Un concepto integral que incluye determinantes sociales, económicos y la promoción de la salud.", justification: "El enfoque contemporáneo de la salud mental, y de la salud en general, es integral y biopsicosocial. Supera la visión de 'ausencia de enfermedad' para incluir factores sociales, económicos y comunitarios, así como la promoción y prevención." },
+            { question: "La psicología del trabajo y de las organizaciones se ocupa principalmente de:", options: ["Aumentar la productividad a cualquier costo.", "Promover la salud laboral y el bienestar físico, mental y social de los trabajadores.", "Mejorar únicamente los salarios de los empleados.", "Analizar los conflictos inconscientes de los gerentes."], answer: "Promover la salud laboral y el bienestar físico, mental y social de los trabajadores.", justification: "Esta área de la psicología busca optimizar tanto el rendimiento como la calidad de vida en el entorno laboral, abordando factores como el clima organizacional, el estrés, la motivación y la seguridad." },
+            { question: "¿Cuál de las siguientes es una de las principales críticas a la Psicología Experimental de Wundt?", options: ["Que el sujeto es visto como un agente activo y contextualizado.", "Que su método era demasiado holístico e impreciso.", "Que el sujeto es un ente pasivo que reacciona a estímulos, perdiendo su historicidad.", "Que se enfocaba demasiado en las diferencias individuales."], answer: "Que el sujeto es un ente pasivo que reacciona a estímulos, perdiendo su historicidad.", justification: "Los críticos argumentaron que, al descomponer la experiencia en elementos básicos en un laboratorio, se perdía la riqueza y complejidad del ser humano como un todo, transformándolo en un mero reactor a estímulos controlados." },
+            { question: "Abraham Maslow, psicólogo humanista, propone una 'pirámide de las necesidades' humanas en la cual:", options: ["Las necesidades están divididas en cinco categorías, estando en la base las fisiológicas y en la cima la autorrealización.", "Para lograr el reconocimiento es necesario primero satisfacer la autorrealización.", "No hay un orden establecido para la satisfacción de las necesidades.", "Las necesidades de seguridad son las más importantes de todas."], answer: "Las necesidades están divididas en cinco categorías, estando en la base las fisiológicas y en la cima la autorrealización.", justification: "La teoría de Maslow postula una jerarquía donde las necesidades más básicas (como la comida y el refugio) deben ser satisfechas antes de que la persona pueda enfocarse en necesidades superiores como la estima y, finalmente, la autorrealización." },
+            { question: "En el campo de la discapacidad, el modelo social entiende que esta se produce a partir de:", options: ["Una enfermedad neurológica exclusivamente.", "Una relación negativa entre la condición de salud de la persona y un contexto con barreras.", "La incapacidad de la persona para vincularse con su familia.", "La negatividad de la persona para adaptarse al entorno."], answer: "Una relación negativa entre la condición de salud de la persona y un contexto con barreras.", justification: "Este modelo sitúa la discapacidad no en el individuo, sino en la sociedad. La discapacidad surge cuando un entorno no está preparado para la diversidad funcional de las personas, imponiendo barreras físicas, sociales o culturales." },
+            { question: "La visión del 'mundo-máquina' de la Modernidad, resultado de los cambios en la física y la astronomía, tuvo como consecuencia para la psicología:", options: ["El surgimiento de corrientes idealistas.", "La inclusión de la subjetividad como objeto de estudio principal.", "La creación de una ciencia experimental y de laboratorio.", "El rechazo a cualquier método cuantitativo."], answer: "La creación de una ciencia experimental y de laboratorio.", justification: "La idea de que el universo (y por extensión, el cuerpo y la mente) funcionaba como una máquina predecible impulsó el deseo de estudiar los fenómenos psicológicos con el mismo rigor, medición y control que se aplicaba a la física, dando lugar a la psicología experimental." },
+            { question: "Según Bleger, el mito del 'hombre natural' es una falacia que postula que:", options: ["La condición del ser humano es, desde su origen, social.", "Hay un estado o esencia originaria del ser humano que se corrompe por la influencia de la civilización.", "El ser humano no tiene una naturaleza fija.", "La cultura enriquece el estado natural del hombre."], answer: "Hay un estado o esencia originaria del ser humano que se corrompe por la influencia de la civilización.", justification: "Bleger critica esta idea romántica (como la del 'buen salvaje' de Rousseau), argumentando que es una abstracción que niega la condición fundamental del ser humano: ser un producto de sus relaciones sociales y su historia desde el inicio." },
+            { question: "Respecto al dualismo mente-cuerpo, es correcto afirmar que:", options: ["Fue resuelto definitivamente por la psicología experimental.", "Es un problema que la psicología actual ya no considera relevante.", "Se refiere a la concepción de la existencia de dos sustancias opuestas: la material y la espiritual.", "Surgió por primera vez con el Conductismo."], answer: "Se refiere a la concepción de la existencia de dos sustancias opuestas: la material y la espiritual.", justification: "Este es el núcleo del problema filosófico heredado por la psicología, especialmente a partir de Descartes. La tensión entre lo mental (privado, subjetivo) y lo físico (público, observable) ha marcado la historia de la disciplina, generando diversas escuelas y enfoques." },
+            { question: "Las tres áreas de manifestación de la conducta según Bleger son:", options: ["Inconsciente, Preconsciente y Consciente.", "Mente, Cuerpo y Mundo exterior.", "Individuo, Grupo e Institución.", "Estímulo, Respuesta y Consecuencia."], answer: "Mente, Cuerpo y Mundo exterior.", justification: "Bleger postula que toda conducta es una unidad que se manifiesta simultáneamente en estas tres áreas: el área 1 (mente, procesos simbólicos), el área 2 (cuerpo, manifestaciones fisiológicas) y el área 3 (mundo exterior, acciones concretas)." },
+            { question: "La psicología humanista se considera la 'tercera fuerza' porque surge como una reacción crítica a:", options: ["El Estructuralismo y el Funcionalismo.", "La Psicología de la Gestalt y la Psicofísica.", "El Psicoanálisis y el Conductismo.", "El Positivismo y el Empirismo."], answer: "El Psicoanálisis y el Conductismo.", justification: "El humanismo se presentó como una alternativa a las dos grandes escuelas dominantes de la primera mitad del siglo XX. Criticaba al psicoanálisis por su determinismo y su visión pesimista del hombre, y al conductismo por su mecanicismo y por ignorar la conciencia y la experiencia subjetiva." },
+            { question: "¿Cuál de las siguientes expresiones pertenece a José Bleger?", options: ["El todo es más que la suma de sus partes.", "La conducta es una respuesta a un estímulo.", "El estudio de la conducta se hace en función de la personalidad y del inseparable contexto social.", "Conócete a ti mismo."], answer: "El estudio de la conducta se hace en función de la personalidad y del inseparable contexto social.", justification: "Esta frase resume la perspectiva de Bleger, quien se opone a una visión reduccionista de la conducta. Para él, la conducta solo puede ser entendida en su contexto, como una manifestación de la personalidad total en una situación dada." }
         ];
 
         let currentQuestions = [];
@@ -342,6 +328,8 @@
         let userAnswers = [];
         let isAudioEnabled = false;
         let synth;
+        let startTime;
+        let timerInterval;
 
         function initSpeechSynthesis() {
             if ('speechSynthesis' in window) {
@@ -364,21 +352,22 @@
         const progressCounter = document.getElementById('progress-counter');
         const audioToggleBtn = document.getElementById('audio-toggle');
         const nextBtn = document.getElementById('next-btn');
+        const timerDisplay = document.getElementById('timer-display');
         
         function shuffleWithStreakLimit(arr, limit) {
             let shuffled = [...arr].sort(() => Math.random() - 0.5); 
             
             for (let i = 0; i <= shuffled.length - limit; i++) {
                 let currentAnswer = shuffled[i].answer;
-                let streak = true;
+                let isStreak = true;
                 for (let j = 1; j < limit; j++) {
                     if (shuffled[i+j].answer !== currentAnswer) {
-                        streak = false;
+                        isStreak = false;
                         break;
                     }
                 }
                 
-                if (streak) {
+                if (isStreak) {
                     let swapIndex = -1;
                     for (let k = i + limit; k < shuffled.length; k++) {
                         if (shuffled[k].answer !== currentAnswer) {
@@ -414,8 +403,19 @@
             menuScreen.classList.remove('active');
             scoreScreen.classList.remove('active');
             quizScreen.classList.add('active');
+            
+            startTime = new Date();
+            timerInterval = setInterval(updateTimerDisplay, 1000);
 
             displayQuestion();
+        }
+
+        function updateTimerDisplay() {
+            const now = new Date();
+            const elapsed = Math.floor((now - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60);
+            const seconds = elapsed % 60;
+            timerDisplay.textContent = `Tiempo: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
 
         function displayQuestion() {
@@ -532,10 +532,13 @@
         }
         
         function showScore() {
+            clearInterval(timerInterval);
             quizScreen.classList.remove('active');
             scoreScreen.classList.add('active');
             
             const finalScoreDiv = document.getElementById('final-score');
+            const totalTimeDisplay = document.getElementById('total-time-display');
+            const passFailResult = document.getElementById('pass-fail-result');
             
             let correctAnswers = 0;
             for(let i=0; i < currentQuestions.length; i++) {
@@ -546,8 +549,24 @@
             score = correctAnswers;
 
             const percentage = currentQuestions.length > 0 ? Math.round((score / currentQuestions.length) * 100) : 0;
+            
+            const totalTime = new Date() - startTime;
+            const totalSeconds = Math.floor(totalTime / 1000);
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            totalTimeDisplay.textContent = `Tiempo total: ${minutes} minutos y ${seconds} segundos.`;
+            
             finalScoreDiv.innerHTML = `Puntuación Final:<br><strong>${score} de ${currentQuestions.length} correctas (${percentage}%)</strong>`;
-            speak(`Cuestionario completado. Tu puntuación final es ${score} de ${currentQuestions.length} preguntas correctas.`);
+            
+            if (percentage >= 60) {
+                passFailResult.textContent = "Resultado: ¡Aprobado!";
+                passFailResult.className = 'pass';
+            } else {
+                passFailResult.textContent = "Resultado: Necesitas Repasar";
+                passFailResult.className = 'fail';
+            }
+
+            speak(`Cuestionario completado. Tu puntuación final es ${score} de ${currentQuestions.length} correctas. ${passFailResult.textContent}`);
         }
         
         function goToMenu() {
